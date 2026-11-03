@@ -1,91 +1,197 @@
 # SensorLab — Dynamic Characteristics Toolkit
 
-**Group: Messi**
+**ENCS4380 — Interfacing Techniques**
 
-**Group members:** Ahmad AbuAyyash · Jamal Owesi · Hakam Snouber · Abd-Alfattah Dawood
+**Birzeit University**
 
-**ENCS4380 Interfacing Techniques · Birzeit University · Homework 1**
+**Instructor:** Dr. Wasel Ghanem
 
-## Checkpoint 1 (3 November 2026)
+**Group Name:** Messi
 
-A responsive, entirely client-side first-order dynamic characteristics teaching tool with a simple Argentina-inspired sky blue, white, and gold academic interface. The module includes:
+## Group Members
 
-- Live gain **K** and time-constant **τ** sliders.
-- Switchable **unit step** and **unit-slope ramp** inputs.
-- Time-response curve over a fixed 0–30 s window, ideal input comparison, and the step response **63.2% at τ** and **95.0% at 3τ** markers.
-- Ramp steady-state time lag **τ**, vertical error **KAτ**, and finite-time error.
-- A logarithmic **transient error-fraction** graph with slope **−1/τ** for ln(error fraction) versus time.
-- **Predict, then check** exercise that changes τ and provides feedback.
-- Live validation against the first two rounded lecture values of validation test 1.
-- Mobile-friendly layout and no external JavaScript dependencies.
+| Name | Assigned Module |
+|---|---|
+| Ahmad AbuAyyash | Module 1 — First-Order Time Response |
+| Jamal Owesi | Module 2 — First-Order Frequency Response |
+| Hakam Snouber | Module 3 — Second-Order Response |
+| Abd-Alfattah Dawood | Module 4 — Guess the Sensor Challenge |
 
-## Design notes
+## Project Overview
 
-The interface uses the Argentina national football team’s **sky blue and white**, with a small gold accent, while keeping charts and course concepts central. The public website does not display assignment instructions or submission requirements; those stay in this README.
+This project is an interactive web toolkit designed to demonstrate the dynamic characteristics of sensors.
 
-### Live GitHub Pages link
+Users can change system parameters, observe how sensors respond to different inputs, and understand important concepts through live graphs and calculations.
 
-https://jamalowesi.github.io/encs4380-dynamics-messi/
+The toolkit is developed using HTML, CSS, and JavaScript and is hosted using GitHub Pages.
 
-## Screenshot
+## Live Website
 
-![Checkpoint 1 SensorLab screenshot](assets/preview.png)
+**[Open SensorLab — Group Messi](https://jamalowesi.github.io/encs4380-dynamics-messi/)**
 
-## Launch locally
+**GitHub Repository:**
 
-Open `index.html` in a modern browser. No server, npm, or installation is needed.
+https://github.com/JamalOwesi/encs4380-dynamics-messi
 
-## GitHub Pages deployment
+## Checkpoint 1 — November 3, 2026
 
-1. Create a **public** repository named `encs4380-dynamics-messi`.
-2. Upload **all** project files and folders (`index.html`, `assets`, `README.md`, `.nojekyll`) to the repository root on the `main` branch.
-3. Open **Settings → Pages → Build and deployment → Source: Deploy from a branch**.
-4. Choose **Branch: main** and **Folder: /(root)** and click **Save**.
-5. Open the live URL shown in **Settings → Pages** and test step/ramp graphs and the sliders on a phone.
-6. Add the live link to this README and commit the change.
+### Module 1: First-Order Time Response
 
-## Group collaboration and module ownership
+**Status:** Implemented
 
-**Group name:** Messi
+Module 1 demonstrates how a first-order sensor responds to step and ramp inputs. Users can adjust the sensor gain and time constant and observe the changes in real time.
 
-| Group member | Assigned module / contribution | GitHub issue |
-|---|---|---|
-| Ahmad AbuAyyash | To be assigned by the group | — |
-| Jamal Owesi | To be assigned by the group | — |
-| Hakam Snouber | To be assigned by the group | — |
-| Abd-Alfattah Dawood | To be assigned by the group | — |
+### Implemented Features
 
-Each group member should make commits for their own contribution. Create a GitHub issue for each of the four modules and assign an owner. Invite the instructor to the repository using `ghanem@staff.birzeit.edu` via **Settings → Collaborators → Add people**.
+- Interactive sliders for gain (K) and time constant (τ).
+- Step and ramp input selection.
+- Live graphs showing the ideal input and sensor output.
+- Response markers at 63.2% (t = τ) and 95% (t = 3τ).
+- Ramp time lag and steady-state error calculations.
+- Logarithmic error-fraction graph.
+- Display of the error decay slope (−1/τ).
+- Interactive "Predict, then check" exercise.
+- Automatic validation checks.
+- Responsive interface for desktop and mobile devices.
 
-## Equations implemented
+### Mathematical Model
 
-System: `τ y'(t) + y(t) = K x(t)`; initial condition `y(0) = 0`.
+The first-order system is described by:
 
-With a **unit step** `x(t) = A = 1`:
+`τ dy/dt + y = Kx`
 
-`y(t) = KA[1 - exp(-t/τ)]`
+**Step response:**
 
-With a **unit ramp** `x(t) = At` and `A = 1 unit/s`:
+`y(t) = KA(1 - e^(-t/τ))`
 
-`y(t) = KA[t - τ(1 - exp(-t/τ))]`
+**Ramp response:**
 
-Ramp scaled-input error:
+`y(t) = KA[t - τ(1 - e^(-t/τ))]`
 
-`Kx(t) - y(t) = KAτ[1 - exp(-t/τ)]`, tending to `KAτ` as `t → ∞`.
+**Steady-state ramp error:**
 
-The normalized transient error fraction is `E(t) = exp(-t/τ)`. For steps it is `(KA - y)/(KA)`. For ramps it is `(KAτ - [Kx-y])/(KAτ)`. Hence `ln E(t) = -t/τ`, slope `-1/τ`.
+`e_ss = KAτ`
 
-Expected check 1: `y(τ)/(KA) = 1 - exp(-1) = 63.212%` → `63.2%` rounded.
+**Transient error fraction:**
 
-Expected check 2: `y(3τ)/(KA) = 1 - exp(-3) = 95.021%` → `95.0%` rounded.
+`E(t) = e^(-t/τ)`
 
-## Course timeline
+Taking the natural logarithm:
 
-- **Nov 3:** Checkpoint 1 — GitHub Pages live + Module 1 working.
-- **Nov 9:** Checkpoint 2 — Modules 2 & 3 working.
-- **Nov 12:** Final — all four modules, release tag `v1.0` and course-page link.
-- **Nov 15–16:** Group demonstration and individual explanation.
+`ln(E(t)) = -t/τ`
 
-## AI-use disclosure
+Therefore, the logarithmic error slope is `-1/τ`.
 
-The initial HTML, CSS, JavaScript, and documentation were created **with assistance from ChatGPT**. Group members are responsible for understanding, testing, modifying, and explaining every equation and line of code in the demo. Adjust this note if your actual workflow differs.
+### Validation Results
+
+The following values are checked automatically in Module 1:
+
+| Test | Expected Value | Calculated Value | Result |
+|---|---|---|---|
+| Step response at t = τ | 63.2% | 63.21% | PASS |
+| Step response at t = 3τ | 95.0% | 95.02% | PASS |
+
+The values agree with the expected first-order response from the course lecture.
+
+## Upcoming Modules
+
+### Module 2: First-Order Frequency Response
+
+**Deadline:** November 9, 2026
+
+**Status:** Planned
+
+This module will demonstrate how a first-order sensor responds to sinusoidal inputs at different frequencies.
+
+Planned features include:
+
+- Adjustable time constant and frequency.
+- Input and output sine-wave graphs.
+- Amplitude ratio and phase lag calculations.
+- Bode plot with cutoff frequency.
+- Dynamic-error calculator.
+- Prediction exercise and validation checks.
+
+### Module 3: Second-Order Response
+
+**Deadline:** November 9, 2026
+
+**Status:** Planned
+
+This module will simulate second-order systems using a mass-spring-damper model.
+
+Planned features include:
+
+- Adjustable damping ratio and natural frequency.
+- Underdamped, critically damped, and overdamped responses.
+- Rise time, peak time, overshoot, and settling time.
+- System poles in the s-plane.
+- State-space matrices and eigenvalues.
+- Phase-plane trajectory.
+- Prediction exercise and validation checks.
+
+### Module 4: Guess the Sensor Challenge
+
+**Deadline:** November 12, 2026
+
+**Status:** Planned
+
+This module will provide an interactive challenge where users estimate unknown sensor parameters from response curves.
+
+Planned features include:
+
+- Random first-order and second-order sensors.
+- Noisy response curves.
+- Parameter estimation by users.
+- Comparison of estimated and actual responses.
+- Accuracy-based scoring.
+- New sensor and hint buttons.
+- Running session score.
+
+## Project Screenshot
+
+![SensorLab Screenshot](assets/preview.png)
+
+## Technologies Used
+
+- **HTML5:** Website structure.
+- **CSS3:** Layout, styling, and responsive design.
+- **JavaScript:** Mathematical calculations, graphs, sliders, and interactions.
+- **Git and GitHub:** Version control and team collaboration.
+- **GitHub Pages:** Website hosting.
+
+The website uses a simple Argentina-inspired sky-blue, white, and gold color scheme.
+
+## Running the Project Locally
+
+1. Download or clone the repository.
+2. Open the project folder.
+3. Open `index.html` in a web browser.
+4. Use the sliders and controls to explore the simulations.
+
+No additional software installation or server is required.
+
+## GitHub Collaboration
+
+The project is maintained in a shared public GitHub repository.
+
+Each module has a corresponding GitHub Issue for task organization and assignment.
+
+All group members are expected to contribute to the project through their own GitHub commits.
+
+**[View GitHub Issues](https://github.com/JamalOwesi/encs4380-dynamics-messi/issues)**
+
+The course instructor is invited as a repository collaborator.
+
+## Project Timeline
+
+| Date | Milestone |
+|---|---|
+| November 3, 2026 | Checkpoint 1 — Module 1 and live GitHub Pages |
+| November 9, 2026 | Checkpoint 2 — Modules 2 and 3 |
+| November 12, 2026 | Final submission — All four modules and release v1.0 |
+| November 15–16, 2026 | Group demonstration |
+
+## AI Assistance
+
+Our group worked on the Dynamic Characteristics Toolkit with assistance from ChatGPT in developing the website, improving the interface, implementing the simulations, and preparing the documentation. The group is responsible for reviewing, testing, and understanding the implementation.
