@@ -25,9 +25,7 @@ The interface uses the Argentina national football team’s **sky blue and white
 
 ### Live GitHub Pages link
 
-After publishing, add your GitHub Pages address here. It will look like:
-
-`https://YOUR-USERNAME.github.io/encs4380-dynamics-messi/`
+https://jamalowesi.github.io/encs4380-dynamics-messi/
 
 ## Screenshot
 
