@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#75b8e3" />
+  <meta name="description" content="ENCS4380: interactive first-order sensor step and ramp responses with live graphs and validation checks." />
+  <title>SensorLab | First-Order Sensor Response</title>
+  <link rel="stylesheet" href="assets/styles.css" />
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <div class="site-wrap">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="SensorLab home"><span class="brand-icon" aria-hidden="true">∿</span> <span>Sensor<span class="brand-accent">Lab</span></span></a>
+      <nav aria-label="Primary navigation" class="top-nav">
+        <a class="active" href="#explore">Explorer</a>
+        <a href="#learn">Learn</a>
+        <a href="#validate">Validation</a>
+        <a href="#team">Team</a>
+      </nav>
+      <span class="course-pill"><span class="status-dot" aria-hidden="true"></span> Group Messi · ENCS4380</span>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="page-heading">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> DYNAMIC CHARACTERISTICS · ENCS4380</div>
+          <h1 id="page-heading">Explore how sensors <em>respond over time.</em></h1>
+          <p>Explore the effect of gain and time constant on a first-order sensor. Change the inputs and see the response and error curves update immediately.</p>
+          <div class="hero-tags"><span><span class="tag-dot gold"></span> Step &amp; ramp inputs</span><span><span class="tag-dot blue"></span> Live response</span><span><span class="tag-dot navy"></span> Verified equations</span></div>
+        </div>
+        <div class="hero-art" aria-hidden="true"><svg viewBox="0 0 330 200"><defs><linearGradient id="curveGrad" x1="0" x2="1"><stop stop-color="#1685c5"/><stop offset="1" stop-color="#75b8e3"/></linearGradient></defs><g stroke="#8cb9da" stroke-opacity=".5"><path d="M24 20 V174 H310 M24 52 H310 M24 88 H310 M24 125 H310 M93 20 V174 M165 20 V174 M237 20 V174" fill="none" stroke-dasharray="3 6"/></g><path d="M24 174 C49 112 72 78 98 59 S164 34 220 28 S280 26 306 25" fill="none" stroke="url(#curveGrad)" stroke-width="5" stroke-linecap="round"/><path d="M24 25 H306" stroke="#d9a22c" stroke-width="2" stroke-dasharray="7 7"/><circle cx="93" cy="61.7" r="7" fill="#1685c5" stroke="#f3faff" stroke-width="4"/><circle cx="237" cy="27" r="5" fill="#e0ac37"/><text x="99" y="81" fill="#24537a" font-size="12">τ</text><text x="274" y="49" fill="#24537a" font-size="12">3τ</text></svg><div class="art-badge"><span class="pulse-dot"></span> FIRST-ORDER SYSTEM</div></div>
+      </section>
+
+      <section id="explore" class="explorer-section" aria-labelledby="explorer-heading">
+        <div class="section-intro"><div><p class="section-kicker">01 / INTERACTIVE EXPLORER</p><h2 id="explorer-heading">First-order time response</h2><p>Change the parameters. The sensor and error plots redraw immediately.</p></div><span class="equation-badge">τ dy/dt + y = Kx</span></div>
+        <div class="explorer-grid">
+          <aside class="control-panel panel" aria-label="Sensor controls">
+            <div class="panel-heading"><div><span class="section-label">CONTROL PANEL</span><h3>Adjust your sensor</h3></div><span class="live-indicator"><span class="pulse-dot"></span> LIVE</span></div>
+            <fieldset class="input-choice"><legend>INPUT SIGNAL</legend><div class="segment-row"><label class="segment"><input id="input-step" type="radio" name="signal" value="step" checked/><span>Step <small>instant change</small></span></label><label class="segment"><input id="input-ramp" type="radio" name="signal" value="ramp"/><span>Ramp <small>steady increase</small></span></label></div></fieldset>
+            <div class="slider-block"><div class="slider-heading"><label for="gain">Sensor gain <strong>K</strong></label><output id="gain-readout" for="gain">1.0</output></div><input id="gain" type="range" min="0.5" max="3" step="0.1" value="1"/><div class="range-hints"><span>0.5</span><span>3.0</span></div><p>Changes how strongly the sensor responds.</p></div>
+            <div class="slider-block"><div class="slider-heading"><label for="tau">Time constant <strong>τ</strong></label><output id="tau-readout" for="tau">4.0 s</output></div><input id="tau" type="range" min="0.5" max="8" step="0.1" value="4"/><div class="range-hints"><span>0.5 s · fast</span><span>8 s · slow</span></div><p>Higher τ means the sensor responds more slowly.</p></div>
+            <div class="control-divider"></div><button id="reset" type="button" class="reset-button"><span aria-hidden="true">↺</span> Reset to defaults</button>
+            <div class="control-note"><span class="note-symbol" aria-hidden="true">✦</span><p><strong>Try this:</strong> Increase τ and watch the response fall further behind the ideal input.</p></div>
+          </aside>
+
+          <div class="main-charts">
+            <section class="chart-panel panel" aria-labelledby="response-heading"><div class="chart-head"><div><span class="section-label">TIME DOMAIN</span><h3 id="response-heading">Sensor response <span class="inline-subtitle" id="response-subtitle">· step input</span></h3></div><div class="legend"><span><i class="legend-line teal"></i> Sensor output</span><span><i class="legend-line dashed"></i> Ideal Kx</span></div></div><div class="svg-wrap"><svg id="response-chart" role="img" aria-label="Live time-domain sensor output and ideal scaled input" viewBox="0 0 760 315" preserveAspectRatio="xMidYMid meet"></svg></div><div class="chart-foot"><span id="response-caption">At τ the response reaches 63.2% of its final value.</span><span>TIME (s) →</span></div></section>
+            <div class="stat-grid"><div class="stat panel"><span id="metric-one-title">AT t = τ</span><strong id="metric-one">63.2%</strong><small id="metric-one-detail">of the final step value</small></div><div class="stat panel"><span id="metric-two-title">AT t = 3τ</span><strong id="metric-two">95.0%</strong><small id="metric-two-detail">of the final step value</small></div><div class="stat panel"><span id="metric-three-title">FINAL VALUE</span><strong id="metric-three">1.00</strong><small id="metric-three-detail">K × step amplitude</small></div></div>
+          </div>
+        </div>
+        <div class="secondary-grid">
+          <section class="panel error-panel" aria-labelledby="error-heading"><div class="chart-head"><div><span class="section-label">ERROR ANALYSIS</span><h3 id="error-heading">Error fraction · logarithmic scale</h3></div><span class="math-tag">ln(error fraction) = −t / τ</span></div><div class="svg-wrap"><svg id="error-chart" role="img" aria-label="Error fraction against time on a logarithmic vertical axis" viewBox="0 0 760 292" preserveAspectRatio="xMidYMid meet"></svg></div><div class="error-footer"><span><i class="legend-line teal"></i> Transient error fraction e<sup>−t/τ</sup></span><strong id="slope-readout">Slope = −0.250 s⁻¹</strong></div></section>
+          <section class="panel predict-panel" aria-labelledby="predict-heading"><span class="section-label">THINK LIKE AN ENGINEER</span><h3 id="predict-heading">Predict, then check.</h3><p>Before changing the time constant, make a prediction.</p><div class="question-card"><div class="question-idx">QUESTION 01</div><strong>If the time constant τ increases, what happens to the sensor?</strong></div><fieldset class="answer-choices"><legend class="sr-only">Select your prediction</legend><label><input type="radio" name="prediction" value="faster"/><span>It responds faster</span></label><label><input type="radio" name="prediction" value="slower"/><span>It responds more slowly</span></label><label><input type="radio" name="prediction" value="gain"/><span>Its final step value increases</span></label></fieldset><button id="check-prediction" class="primary-button" type="button">Check prediction &amp; increase τ <span aria-hidden="true">→</span></button><div id="prediction-feedback" class="prediction-feedback" role="status" aria-live="polite">Choose an answer to test your intuition.</div></section>
+        </div>
+      </section>
+
+      <section id="learn" class="learn-section" aria-labelledby="learn-heading"><div class="section-intro"><div><p class="section-kicker">02 / UNDERSTAND THE PHYSICS</p><h2 id="learn-heading">What the equations mean</h2><p>These are the closed-form formulas used to draw the graphs, not approximations.</p></div></div><div class="learn-grid"><article class="panel learn-card"><div class="learn-index">01 · STEP</div><h3>A sudden change</h3><div class="display-equation">y(t) = KA(1 − e<sup>−t/τ</sup>)</div><p>For a step input of size A = 1, the output approaches KA. After one τ, it is 63.2% of the way there; after three τ, about 95%.</p></article><article class="panel learn-card"><div class="learn-index">02 · RAMP</div><h3>A continuously rising input</h3><div class="display-equation">y(t) = KA[t − τ(1 − e<sup>−t/τ</sup>)]</div><p>For a ramp x(t) = At with A = 1 unit/s, the output eventually trails the ideal scaled ramp by a time lag τ and a vertical error KAτ.</p></article><article class="panel learn-card"><div class="learn-index">03 · ERROR</div><h3>Exponential decay</h3><div class="display-equation">E(t) = e<sup>−t/τ</sup></div><p>The normalized transient error falls exponentially. On a logarithmic vertical axis it becomes a straight line; the slope of ln(E) against time is −1/τ.</p></article></div></section>
+
+      <section id="validate" class="validation-section" aria-labelledby="validation-heading"><div class="section-intro"><div><p class="section-kicker">03 / BUILT-IN VALIDATION</p><h2 id="validation-heading">Check against the lecture</h2><p>Compare the simulated step response with the expected values from the lecture.</p></div><span class="passed-pill" id="validation-status">2 / 2 PASSED</span></div><div class="panel validation-panel"><div class="validation-table-wrap"><table><thead><tr><th>Validation point</th><th>Expected</th><th>Calculated</th><th>Status</th></tr></thead><tbody><tr><td>Step at t = τ</td><td>63.2% of KA</td><td id="test-one-result">63.21% of KA</td><td><span id="test-one-status" class="test-pass">PASS</span></td></tr><tr><td>Step at t = 3τ</td><td>95.0% of KA</td><td id="test-two-result">95.02% of KA</td><td><span id="test-two-status" class="test-pass">PASS</span></td></tr></tbody></table></div><p class="validation-note">A difference of up to 0.05 percentage points is accepted because the lecture values are rounded. Both checks use the exact step-response equation. </p></div></section>
+
+      <section id="team" class="team-section" aria-labelledby="team-heading">
+        <div class="team-heading">
+          <div>
+            <p class="section-kicker">THE PROJECT TEAM</p>
+            <h2 id="team-heading">Group Messi</h2>
+            <p>ENCS4380 · Interfacing Techniques · Birzeit University</p>
+          </div>
+          <span class="team-count">4 members</span>
+        </div>
+        <div class="team-members">
+          <div class="team-member"><span class="member-mark" aria-hidden="true">01</span><span>Ahmad AbuAyyash</span></div>
+          <div class="team-member"><span class="member-mark" aria-hidden="true">02</span><span>Jamal Owesi</span></div>
+          <div class="team-member"><span class="member-mark" aria-hidden="true">03</span><span>Hakam Snouber</span></div>
+          <div class="team-member"><span class="member-mark" aria-hidden="true">04</span><span>Abd-Alfattah Dawood</span></div>
+        </div>
+      </section>
+    </main>
+    <footer><div><span class="footer-brand">∿ SensorLab</span><span>ENCS4380 · Interfacing Techniques · Birzeit University</span></div><span>Group Messi · Module 01</span></footer>
+  </div>
+</body>
+</html>
