@@ -19,25 +19,31 @@
 
 ## Project Overview
 
-This project is an interactive web toolkit designed to demonstrate the dynamic characteristics of sensors.
+SensorLab is an interactive educational website designed to demonstrate the dynamic characteristics of sensors.
 
-Users can change system parameters, observe how sensors respond to different inputs, and understand important concepts through live graphs and calculations.
+Users can change system parameters, observe how sensors respond to different inputs, and understand important engineering concepts through live graphs and calculations.
 
-The toolkit is developed using HTML, CSS, and JavaScript and is hosted using GitHub Pages.
+The project contains four interactive modules. The simulations, calculations, graphs, and interactions are developed using Python running directly in the browser through Pyodide.
+
+HTML and CSS are used for the website structure and design, while a small JavaScript file loads the Python environment.
 
 ## Live Website
 
-**[Open SensorLab — Group Messi](https://jamalowesi.github.io/encs4380-dynamics-messi/)**
+**GitHub Pages:**
+
+https://jamalowesi.github.io/encs4380-dynamics-messi/
 
 **GitHub Repository:**
 
 https://github.com/JamalOwesi/encs4380-dynamics-messi
 
-## Checkpoint 1 — November 3, 2026
+**Note:** The new Python version has been prepared locally. The live website will show the updated Python implementation after the new files are uploaded and deployed to GitHub Pages.
 
-### Module 1: First-Order Time Response
+## Module 1 — First-Order Time Response
 
-**Status:** Implemented
+**Status:** Implemented in Python
+
+**Checkpoint 1:** November 3, 2026
 
 Module 1 demonstrates how a first-order sensor responds to step and ramp inputs. Users can adjust the sensor gain and time constant and observe the changes in real time.
 
@@ -45,7 +51,7 @@ Module 1 demonstrates how a first-order sensor responds to step and ramp inputs.
 
 - Interactive sliders for gain (K) and time constant (τ).
 - Step and ramp input selection.
-- Live graphs showing the ideal input and sensor output.
+- Live graphs comparing the ideal input and sensor output.
 - Response markers at 63.2% (t = τ) and 95% (t = 3τ).
 - Ramp time lag and steady-state error calculations.
 - Logarithmic error-fraction graph.
@@ -62,11 +68,11 @@ The first-order system is described by:
 
 **Step response:**
 
-`y(t) = KA(1 - e^(-t/τ))`
+`y(t) = KA(1 - exp(-t/τ))`
 
 **Ramp response:**
 
-`y(t) = KA[t - τ(1 - e^(-t/τ))]`
+`y(t) = KA[t - τ(1 - exp(-t/τ))]`
 
 **Steady-state ramp error:**
 
@@ -74,7 +80,7 @@ The first-order system is described by:
 
 **Transient error fraction:**
 
-`E(t) = e^(-t/τ)`
+`E(t) = exp(-t/τ)`
 
 Taking the natural logarithm:
 
@@ -82,94 +88,211 @@ Taking the natural logarithm:
 
 Therefore, the logarithmic error slope is `-1/τ`.
 
-### Validation Results
+**Python Source:** `module1.py`
 
-The following values are checked automatically in Module 1:
+## Module 2 — First-Order Frequency Response
+
+**Status:** Implemented in Python
+
+**Checkpoint 2:** November 9, 2026
+
+Module 2 demonstrates how a first-order sensor responds to sinusoidal inputs at different frequencies.
+
+### Implemented Features
+
+- Interactive sliders for time constant (τ) and angular frequency (ω).
+- Input and output sine waves displayed on the same graph.
+- Amplitude ratio and phase lag calculations.
+- Bode magnitude and phase plots.
+- Cutoff frequency at ω = 1/τ.
+- Dynamic-error calculator.
+- Maximum allowable time-constant calculator.
+- Interactive "Predict, then check" exercise.
+- Automatic validation checks based on lecture examples.
+
+### Mathematical Model
+
+**Amplitude ratio:**
+
+`M = 1 / sqrt(1 + (ωτ)^2)`
+
+**Phase shift:**
+
+`φ = -atan(ωτ)`
+
+**Dynamic error:**
+
+`δ = M - 1`
+
+**Cutoff angular frequency:**
+
+`ωc = 1/τ`
+
+The module displays how increasing frequency affects the amplitude and phase of the sensor output.
+
+**Python Source:** `module2.py`
+
+## Module 3 — Second-Order Response
+
+**Status:** Implemented in Python
+
+**Checkpoint 2:** November 9, 2026
+
+Module 3 demonstrates the dynamic behavior of second-order systems using a mass-spring-damper model.
+
+### Implemented Features
+
+- Interactive sliders for mass (m), damping (b), and stiffness (k).
+- Underdamped, critically damped, and overdamped responses.
+- Live second-order step-response graphs.
+- Rise time, peak time, overshoot, and settling time calculations.
+- System poles displayed in the s-plane.
+- State-space matrices A and B.
+- Eigenvalue calculations.
+- Phase-plane graph displaying displacement and velocity.
+- Interactive "Predict, then check" exercise.
+- Automatic validation checks.
+
+### Mathematical Model
+
+The mass-spring-damper system is described by:
+
+`m x'' + b x' + kx = F(t)`
+
+**Natural frequency:**
+
+`ωn = sqrt(k/m)`
+
+**Damping ratio:**
+
+`ζ = b / (2 sqrt(mk))`
+
+### State-Space Representation
+
+Using displacement and velocity as state variables:
+
+`x1 = x`
+
+`x2 = dx/dt`
+
+State matrix:
+
+`A = [[0, 1], [-k/m, -b/m]]`
+
+Input matrix:
+
+`B = [[0], [1/m]]`
+
+Output equation:
+
+`y = [1, 0]x`
+
+The module updates the system matrices, eigenvalues, and response graphs when the parameters change.
+
+**Python Source:** `module3.py`
+
+## Module 4 — Guess the Sensor Challenge
+
+**Status:** Implemented in Python
+
+**Final Submission:** November 12, 2026
+
+Module 4 is an interactive challenge where users analyze an unknown sensor response and estimate its parameters.
+
+### Implemented Features
+
+- Random first-order and second-order sensor models.
+- First-order step and sine response challenges.
+- Second-order step response challenges.
+- Response curves with simulated measurement noise.
+- Hidden sensor parameters.
+- Parameter estimation by users.
+- Reveal of actual parameters after submitting a guess.
+- Comparison of estimated and actual response curves.
+- Accuracy-based scoring system.
+- "New Sensor" button to generate another challenge.
+- Hint button to help users estimate parameters.
+- Running session score and average results.
+
+### Scoring System
+
+The challenge awards a maximum score of 100 points for each round.
+
+Users receive full marks when all their estimated parameters are within 10% of the actual sensor values.
+
+Less accurate estimates receive partial credit based on their relative error.
+
+The session maintains the total score and average performance across multiple rounds.
+
+**Python Source:** `module4.py`
+
+## Validation Results
+
+The Python calculations were checked against the expected values from the course lecture.
 
 | Test | Expected Value | Calculated Value | Result |
 |---|---|---|---|
-| Step response at t = τ | 63.2% | 63.21% | PASS |
-| Step response at t = 3τ | 95.0% | 95.02% | PASS |
+| Module 1: Step at t = τ | 63.2% | 63.212% | PASS |
+| Module 1: Step at t = 3τ | 95.0% | 95.021% | PASS |
+| Module 2: Amplitude ratio | 0.93 | 0.9285 | PASS |
+| Module 2: Phase lag | 21.8° | 21.801° | PASS |
+| Module 2: Maximum τ at 100 Hz | 0.52 ms | 0.523 ms | PASS |
+| Module 2: Phase lag at 50 Hz | 9.3° | 9.33° | PASS |
+| Module 3: Overshoot at ζ = 0.5 | 16.3% | 16.30% | PASS |
+| Module 3: Overshoot at ζ = 1 | 0% | 0% | PASS |
+| Module 3: Eigenvalues for m = 1, b = 2, k = 4 | −1 ± j1.732 | −1 ± j1.732 | PASS |
 
-The values agree with the expected first-order response from the course lecture.
+These results confirm that the numerical calculations agree with the expected lecture values.
 
-## Upcoming Modules
+The complete Python/Pyodide website still requires final browser testing before submission.
 
-### Module 2: First-Order Frequency Response
+## Project Screenshots
 
-**Deadline:** November 9, 2026
+![Python Module 1 Screenshot](assets/python-module1-desktop-preview.png)
 
-**Status:** Planned
-
-This module will demonstrate how a first-order sensor responds to sinusoidal inputs at different frequencies.
-
-Planned features include:
-
-- Adjustable time constant and frequency.
-- Input and output sine-wave graphs.
-- Amplitude ratio and phase lag calculations.
-- Bode plot with cutoff frequency.
-- Dynamic-error calculator.
-- Prediction exercise and validation checks.
-
-### Module 3: Second-Order Response
-
-**Deadline:** November 9, 2026
-
-**Status:** Planned
-
-This module will simulate second-order systems using a mass-spring-damper model.
-
-Planned features include:
-
-- Adjustable damping ratio and natural frequency.
-- Underdamped, critically damped, and overdamped responses.
-- Rise time, peak time, overshoot, and settling time.
-- System poles in the s-plane.
-- State-space matrices and eigenvalues.
-- Phase-plane trajectory.
-- Prediction exercise and validation checks.
-
-### Module 4: Guess the Sensor Challenge
-
-**Deadline:** November 12, 2026
-
-**Status:** Planned
-
-This module will provide an interactive challenge where users estimate unknown sensor parameters from response curves.
-
-Planned features include:
-
-- Random first-order and second-order sensors.
-- Noisy response curves.
-- Parameter estimation by users.
-- Comparison of estimated and actual responses.
-- Accuracy-based scoring.
-- New sensor and hint buttons.
-- Running session score.
-
-## Project Screenshot
-
-![SensorLab Screenshot](assets/preview.png)
+Additional screenshots can be added after the final testing of the four modules.
 
 ## Technologies Used
 
+- **Python:** Mathematical calculations, sensor simulations, graphs, and interactions.
+- **Pyodide:** Executes Python directly inside the web browser.
 - **HTML5:** Website structure.
 - **CSS3:** Layout, styling, and responsive design.
-- **JavaScript:** Mathematical calculations, graphs, sliders, and interactions.
-- **Git and GitHub:** Version control and team collaboration.
-- **GitHub Pages:** Website hosting.
+- **JavaScript:** Loads the Pyodide environment and Python modules.
+- **Git and GitHub:** Version control and collaboration.
+- **GitHub Pages:** Static website hosting.
 
 The website uses a simple Argentina-inspired sky-blue, white, and gold color scheme.
 
+## Project Structure
+
+The project is organized into separate Python files for each module.
+
+| File | Description |
+|---|---|
+| `index.html` | Main website |
+| `module1.py` | First-order time response |
+| `module2.py` | First-order frequency response |
+| `module3.py` | Second-order response |
+| `module4.py` | Guess the Sensor Challenge |
+| `assets/boot.js` | Python runtime initialization |
+| `assets/styles.css` | Main website styling |
+| `assets/frequency.css` | Module 2 styling |
+| `assets/second-order.css` | Module 3 styling |
+| `assets/challenge.css` | Module 4 styling |
+| `README.md` | Project documentation |
+
 ## Running the Project Locally
 
-1. Download or clone the repository.
-2. Open the project folder.
-3. Open `index.html` in a web browser.
-4. Use the sliders and controls to explore the simulations.
+1. Download or clone the project repository.
+2. Extract the project files if downloaded as a ZIP.
+3. Open the folder containing `index.html` and the Python files.
+4. Open `index.html` using Chrome or Microsoft Edge.
+5. Make sure the computer is connected to the internet because Pyodide loads from an external CDN.
+6. Confirm that the Python engine is ready.
+7. Explore the four modules using the interactive controls.
 
-No additional software installation or server is required.
+A Python backend server is not required to run the published website.
 
 ## GitHub Collaboration
 
@@ -177,21 +300,29 @@ The project is maintained in a shared public GitHub repository.
 
 Each module has a corresponding GitHub Issue for task organization and assignment.
 
-All group members are expected to contribute to the project through their own GitHub commits.
+Group members are responsible for contributing to their assigned modules and maintaining their work through GitHub commits.
 
-**[View GitHub Issues](https://github.com/JamalOwesi/encs4380-dynamics-messi/issues)**
+**GitHub Issues:**
 
-The course instructor is invited as a repository collaborator.
+https://github.com/JamalOwesi/encs4380-dynamics-messi/issues
+
+The instructor, Dr. Wasel Ghanem, has been invited as a repository collaborator.
 
 ## Project Timeline
 
 | Date | Milestone |
 |---|---|
-| November 3, 2026 | Checkpoint 1 — Module 1 and live GitHub Pages |
+| November 3, 2026 | Checkpoint 1 — Module 1 |
 | November 9, 2026 | Checkpoint 2 — Modules 2 and 3 |
 | November 12, 2026 | Final submission — All four modules and release v1.0 |
 | November 15–16, 2026 | Group demonstration |
 
 ## AI Assistance
 
-Our group worked on the Dynamic Characteristics Toolkit with assistance from ChatGPT in developing the website, improving the interface, implementing the simulations, and preparing the documentation. The group is responsible for reviewing, testing, and understanding the implementation.
+ChatGPT assisted the group with the Python conversion, interface development, and documentation. The group is responsible for reviewing, testing, understanding, and explaining the implementation and results.
+
+## Final Submission
+
+Before the final submission, the group will verify that all four modules are functioning correctly on GitHub Pages, review the validation results, and update the project documentation if necessary.
+
+The final submission requires a GitHub release tagged `v1.0` and the live website link on the course page.
