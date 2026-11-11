@@ -80,6 +80,10 @@ Open `http://localhost:8000`. Opening the HTML by double-click will not work, be
 ## Screenshots
 ![Project Screenshot](module1.png)
 
+Module 3 · Second-order response Screenshot
+![Project Screenshot](module3.png)
+
+
 ## Use of AI tools
 
 
