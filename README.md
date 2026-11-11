@@ -3,7 +3,7 @@
 **ENCS4380 Interfacing Techniques · Birzeit University · Homework 1 · Group Messi**
 Instructor: Dr. Wasel Ghanem
 
-**Live site:** http://localhost:8000/  ← replace with your real link
+**Live site:** http://localhost:8000/  
 
 A static site (GitHub Pages) where all maths and graphs are computed in Python running in the browser through Pyodide. No server, Binder or login is needed.
 
@@ -79,8 +79,7 @@ Open `http://localhost:8000`. Opening the HTML by double-click will not work, be
 
 ## Screenshots
 
-_Add one screenshot per module here._
 
 ## Use of AI tools
 
-_State here what AI coding assistants were used for (required by the assignment). Every member must be able to explain any line of their module in the demo._
+
