@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>侍 Dynamic Characteristics Toolkit · Group Messi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="#top"><b>家</b>Home</a>
+  <a href="#m1"><b>一</b>Time</a>
+  <a href="#m2"><b>二</b>Frequency</a>
+  <a href="#m3"><b>三</b>2nd order</a>
+  <a href="#m4"><b>四</b>Guess</a>
+</nav>
+
+<main id="top">
+
+  <header class="hero">
+    <div class="seal">侍</div>
+    <small>ENCS4380 · INTERFACING TECHNIQUES · GROUP MESSI</small>
+    <h1>A sensor never reports the present.</h1>
+    <div class="jp">センサー · 動特性 · 武士道</div>
+    <p>It reports the past, smoothed. Master τ, ζ and ωn and learn how far behind your machine really is.</p>
+    <div id="status">Booting servo cores…</div>
+  </header>
+
+  <!-- MODULE 1 -->
+  <div class="katana"></div>
+  <h2 id="m1"><span class="num">一</span>First-order time response <span class="jp">時間応答</span></h2>
+  <p class="sub">A thermometer: <span class="formula">τ·dy/dt + y = K·x(t)</span></p>
+
+  <section class="card">
+    <h3>Controls</h3>
+    <label>Gain K <input id="gain" type="range" min="0.5" max="2" step="0.1" value="1" disabled><span class="val" id="gain-readout"></span></label>
+    <label>Time constant τ <input id="tau" type="range" min="0.5" max="8" step="0.1" value="4" disabled><span class="val" id="tau-readout"></span></label>
+    <div class="row">
+      <label><input type="radio" name="input" id="input-step" checked disabled> Step</label>
+      <label><input type="radio" name="input" id="input-ramp" disabled> Ramp</label>
+      <button id="reset" class="ghost" disabled>Reset</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Response <span id="response-subtitle"></span></h3>
+    <svg id="response-chart" viewBox="0 0 760 315"></svg>
+    <p class="caption" id="response-caption"></p>
+    <div class="metrics">
+      <div class="metric"><b id="metric-one-title"></b><span class="big" id="metric-one"></span><small id="metric-one-detail"></small></div>
+      <div class="metric"><b id="metric-two-title"></b><span class="big" id="metric-two"></span><small id="metric-two-detail"></small></div>
+      <div class="metric"><b id="metric-three-title"></b><span class="big" id="metric-three"></span><small id="metric-three-detail"></small></div>
+    </div>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h3>Error fraction (log axis)</h3>
+      <svg id="error-chart" viewBox="0 0 760 292"></svg>
+      <p class="caption" id="slope-readout"></p>
+    </section>
+
+    <section class="card">
+      <h3>Predict, then check</h3>
+      <p>If τ increases, the sensor responds…</p>
+      <label><input type="radio" name="prediction" value="slower"> more slowly</label>
+      <label><input type="radio" name="prediction" value="faster"> faster</label>
+      <div class="row"><button id="check-prediction" disabled>Check</button></div>
+      <p class="prediction-feedback" id="prediction-feedback">Choose an answer to test your intuition.</p>
+
+      <h3 style="margin-top:22px">Validation <span class="badge" id="validation-status"></span></h3>
+      <div class="test"><span>y(τ) → 63.2% of KA</span><span><span id="test-one-result"></span> <b id="test-one-status"></b></span></div>
+      <div class="test"><span>y(3τ) → 95.0% of KA</span><span><span id="test-two-result"></span> <b id="test-two-status"></b></span></div>
+    </section>
+  </div>
+
+  <!-- MODULE 2 -->
+  <div class="katana"></div>
+  <h2 id="m2"><span class="num">二</span>First-order frequency response <span class="jp">周波数応答</span></h2>
+  <p class="sub"><span class="formula">M = 1/√(1+(ωτ)²)</span> <span class="formula">φ = −atan(ωτ)</span></p>
+
+  <section class="card">
+    <h3>Controls</h3>
+    <label>Time constant τ <input id="freq-tau" type="range" min="0.01" max="2" step="0.01" value="0.2" disabled><span class="val" id="freq-tau-value"></span></label>
+    <label>Input frequency ω <input id="freq-omega" type="range" min="0.1" max="40" step="0.1" value="2" disabled><span class="val" id="freq-omega-value"></span></label>
+    <div class="row">
+      <button id="freq-reset" class="ghost" disabled>Reset</button>
+      <button id="freq-example" disabled>Load homework example (τ = 0.2 s, ω = 2)</button>
+    </div>
+    <div class="metrics">
+      <div class="metric"><b>AMPLITUDE RATIO M</b><span class="big" id="freq-magnitude"></span><small>output / input</small></div>
+      <div class="metric"><b>PHASE LAG</b><span class="big" id="freq-phase"></span><small>output behind input</small></div>
+      <div class="metric"><b>CUTOFF ωc = 1/τ</b><span class="big" id="freq-cutoff"></span><small>rad/s</small></div>
+      <div class="metric"><b>DYNAMIC ERROR δ</b><span class="big" id="freq-error"></span><small>M − 1</small></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Input and output sines</h3>
+    <svg id="frequency-sine-chart" viewBox="0 0 760 315"></svg>
+    <div class="legend"><span><i style="background:#7d93b8"></i>input sin(ωt)</span><span><i style="background:var(--blue)"></i>sensor output</span></div>
+  </section>
+
+  <div class="grid2">
+    <section class="card"><h3>Bode · magnitude</h3><svg id="bode-magnitude-chart" viewBox="0 0 560 295"></svg></section>
+    <section class="card"><h3>Bode · phase</h3><svg id="bode-phase-chart" viewBox="0 0 560 295"></svg></section>
+  </div>
+
+  <div class="grid2">
+    <section class="card">
+      <h3>Dynamic-error calculator</h3>
+      <label>Max signal frequency (Hz) <input id="calc-frequency" type="number" value="100" step="any" min="0" disabled></label>
+      <label>Allowed error (%) <input id="calc-tolerance" type="number" value="5" step="any" min="0" disabled></label>
+      <label>Phase at frequency (Hz) <input id="calc-phase-at" type="number" value="50" step="any" min="0" disabled></label>
+      <div class="metrics">
+        <div class="metric"><b>MAX τ</b><span class="big" id="calc-tau-max"></span></div>
+        <div class="metric"><b>PHASE LAG</b><span class="big" id="calc-phase-result"></span></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Predict, then check</h3>
+      <p>If the input frequency ω increases, the output amplitude…</p>
+      <label><input type="radio" name="freq-prediction" value="lower"> gets smaller</label>
+      <label><input type="radio" name="freq-prediction" value="higher"> gets bigger</label>
+      <div class="row"><button id="freq-predict-check" disabled>Check</button></div>
+      <p class="prediction-feedback" id="freq-predict-feedback">Select an answer to test your prediction.</p>
+
+      <h3 style="margin-top:22px">Validation <span class="badge" id="freq-validation-status"></span></h3>
+      <div class="test"><span>M at τ=0.2, ω=2 (0.93)</span><span><span id="fv-amplitude"></span> <b id="fv-amplitude-status"></b></span></div>
+      <div class="test"><span>Phase lag (21.8°)</span><span><span id="fv-phase"></span> <b id="fv-phase-status"></b></span></div>
+      <div class="test"><span>τ max, 100 Hz, 5% (0.52 ms)</span><span><span id="fv-tau"></span> <b id="fv-tau-status"></b></span></div>
+      <div class="test"><span>Phase at 50 Hz (9.3°)</span><span><span id="fv-phase50"></span> <b id="fv-phase50-status"></b></span></div>
+    </section>
+  </div>
+
+  <!-- MODULE 3 -->
+  <div class="katana"></div>
+  <h2 id="m3"><span class="num">三</span>Second-order response <span class="jp">二次応答</span></h2>
+  <p class="sub">Mass–spring–damper: <span class="formula">m·x″ + b·x′ + k·x = F(t)</span></p>
+
+  <section class="card">
+    <h3>Controls</h3>
+    <label>Mass m <input id="so-m" type="range" min="0.5" max="5" step="0.1" value="1" disabled><span class="val" id="so-m-value"></span></label>
+    <label>Damping b <input id="so-b" type="range" min="0" max="40" step="0.05" value="2" disabled><span class="val" id="so-b-value"></span></label>
+    <label>Stiffness k <input id="so-k" type="range" min="1" max="20" step="0.5" value="4" disabled><span class="val" id="so-k-value"></span></label>
+    <div class="row">
+      <button class="preset ghost" data-zeta="0.5" disabled>Underdamped ζ=0.5</button>
+      <button class="preset ghost" data-zeta="1" disabled>Critical ζ=1</button>
+      <button class="preset ghost" data-zeta="2" disabled>Overdamped ζ=2</button>
+      <button id="so-reset" class="ghost" disabled>Reset</button>
+    </div>
+  </section>
+
+  <section class="card">
+    <h3>Step response</h3>
+    <svg id="so-step-chart" viewBox="0 0 760 335"></svg>
+    <p class="caption" id="so-step-caption"></p>
+    <div class="metrics">
+      <div class="metric"><b>DAMPING RATIO ζ</b><span class="big" id="so-zeta"></span><small id="so-case"></small></div>
+      <div class="metric"><b>NATURAL FREQ ωn</b><span class="big" id="so-wn"></span></div>
+      <div class="metric"><b>RISE TIME</b><span class="big" id="so-rise"></span><small>10% → 90%</small></div>
+      <div class="metric"><b>PEAK TIME</b><span class="big" id="so-peak"></span></div>
+      <div class="metric"><b>OVERSHOOT</b><span class="big" id="so-overshoot"></span></div>
+      <div class="metric"><b>SETTLING (2%)</b><span class="big" id="so-settle"></span></div>
+    </div>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h3>Poles in the s-plane</h3>
+      <svg id="so-poles-chart" viewBox="0 0 540 310"></svg>
+      <p class="caption" id="so-poles-text"></p>
+    </section>
+    <section class="card">
+      <h3>Phase plane (x₁, x₂)</h3>
+      <svg id="so-phase-chart" viewBox="0 0 540 310"></svg>
+      <p class="caption">Spiral = underdamped. No spiral = overdamped.</p>
+    </section>
+  </div>
+
+  <div class="grid2">
+    <section class="card">
+      <h3>State-space panel</h3>
+      <div class="matrix">
+        A = [ 0 &nbsp;&nbsp;&nbsp;&nbsp;1 ]<br>
+        &nbsp;&nbsp;&nbsp;[ <span id="so-A21"></span> &nbsp;<span id="so-A22"></span> ]<br>
+        B = [ 0 ; <span id="so-B2"></span> ]ᵀ &nbsp; C = [ 1 &nbsp;0 ]<br>
+        eigenvalues of A: <b id="so-eigen"></b>
+      </div>
+    </section>
+    <section class="card">
+      <h3>Predict, then check</h3>
+      <p>If damping b increases, the overshoot…</p>
+      <label><input type="radio" name="so-prediction" value="less"> decreases</label>
+      <label><input type="radio" name="so-prediction" value="more"> increases</label>
+      <div class="row"><button id="so-predict-check" disabled>Check</button></div>
+      <p class="prediction-feedback" id="so-predict-feedback">Select an answer to test your prediction.</p>
+
+      <h3 style="margin-top:22px">Validation <span class="badge" id="so-validation-status"></span></h3>
+      <div class="test"><span>ζ=0.5 overshoot (16.3%)</span><span><span id="so-test4"></span> <b id="so-test4-status"></b></span></div>
+      <div class="test"><span>ζ=1 no overshoot</span><span><span id="so-test5"></span> <b id="so-test5-status"></b></span></div>
+      <div class="test"><span>m=1, b=2, k=4 poles</span><span><span id="so-test6"></span> <b id="so-test6-status"></b></span></div>
+    </section>
+  </div>
+
+  <!-- MODULE 4 -->
+  <div class="katana"></div>
+  <h2 id="m4"><span class="num">四</span>Guess the sensor <span class="jp">センサー推測</span></h2>
+  <p class="sub">A hidden random sensor. Read the curve, strike with your estimate, then reveal the truth.</p>
+
+  <section class="card">
+    <div class="score-strip">
+      <div><span id="ch-round">1</span><em>ROUND</em></div>
+      <div><span id="ch-played">0</span><em>SCORED</em></div>
+      <div><span id="ch-total">0</span><em>TOTAL</em></div>
+      <div><span id="ch-average">—</span><em>AVERAGE</em></div>
+      <div><span id="ch-perfect">0</span><em>PERFECT</em></div>
+    </div>
+    <h3 id="ch-kind"></h3>
+    <p class="caption" id="ch-signal" style="margin:0 0 10px"></p>
+    <svg id="ch-chart" viewBox="0 0 760 340"></svg>
+    <div class="legend">
+      <span><i style="background:#137cb4"></i>noisy output</span>
+      <span id="ch-input-legend"><i style="background:#6f91a5"></i>input sine</span>
+      <span id="ch-guess-legend"><i style="background:#d1a02c"></i>your guess</span>
+      <span id="ch-true-legend"><i style="background:#10977f"></i>true model</span>
+    </div>
+    <p class="caption" id="ch-caption"></p>
+  </section>
+
+  <section class="card">
+    <h3>Your estimate</h3>
+    <p id="ch-instructions" class="caption" style="margin-top:0"></p>
+    <form id="ch-form">
+      <div id="ch-fields-first" class="row">
+        <label>K <input id="ch-k" type="number" step="any"></label>
+        <label>τ (s) <input id="ch-tau" type="number" step="any"></label>
+      </div>
+      <div id="ch-fields-second" class="row" hidden>
+        <label>ζ <input id="ch-zeta" type="number" step="any"></label>
+        <label>ωn (rad/s) <input id="ch-wn" type="number" step="any"></label>
+      </div>
+      <div class="row">
+        <button id="ch-submit" type="submit">Submit guess</button>
+        <button id="ch-hint" type="button" class="ghost">Hint</button>
+        <button id="ch-new" type="button" class="ghost">New sensor</button>
+      </div>
+    </form>
+    <p id="ch-error"></p>
+    <div id="ch-hint-text" hidden></div>
+    <div id="ch-result" hidden>
+      <h3 style="margin-top:16px">Score</h3>
+      <div id="ch-score"></div>
+      <div id="ch-reveal"></div>
+      <p id="ch-feedback" class="caption"></p>
+    </div>
+  </section>
+
+  <footer><b>武士道</b> × ROBOTICS<br>ENCS4380 · Birzeit University · All maths and graphs are computed in Python (Pyodide).</footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+<script type="module">
+  const status = document.getElementById("status");
+  try {
+    const pyodide = await loadPyodide();
+    for (const f of ["module1.py", "module2.py", "module3.py", "module4.py"]) {
+      const res = await fetch(f);
+      if (!res.ok) throw new Error("Could not load " + f + " (" + res.status + ")");
+      pyodide.FS.writeFile(f, await res.text());
+    }
+    const starts = [
+      "module1.start_browser_app()",
+      "module2.start_frequency_browser_app()",
+      "module3.start_second_order_browser_app()",
+      "module4.start_challenge_browser_app()",
+    ];
+    const errors = [];
+    for (const call of starts) {
+      try {
+        await pyodide.runPythonAsync("import " + call.split(".")[0] + "\n" + call);
+      } catch (e) { errors.push(call + "\n" + e); }
+    }
+    if (errors.length) {
+      status.className = "err";
+      status.textContent = "Some modules failed:\n\n" + errors.join("\n\n");
+    } else {
+      status.remove();
+    }
+  } catch (e) {
+    status.className = "err";
+    status.textContent = "Failed to start: " + e;
+  }
+</script>
+</body>
+</html>
