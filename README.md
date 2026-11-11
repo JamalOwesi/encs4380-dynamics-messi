@@ -3,7 +3,7 @@
 **ENCS4380 Interfacing Techniques · Birzeit University · Homework 1 · Group Messi**
 Instructor: Dr. Wasel Ghanem
 
-**Live site:** `https://<your-username>.github.io/encs4380-dynamics-<group-name>/`  ← replace with your real link
+**Live site:** http://localhost:8000/  ← replace with your real link
 
 A static site (GitHub Pages) where all maths and graphs are computed in Python running in the browser through Pyodide. No server, Binder or login is needed.
 
