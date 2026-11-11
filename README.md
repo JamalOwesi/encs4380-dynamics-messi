@@ -96,8 +96,9 @@ Open `http://localhost:8000`. Opening the HTML by double-click will not work, be
 
 **Module 4 · Guess the sensor** 
 
-<img width="983" height="772" alt="image" src="https://github.com/user-attachments/assets/f2571f11-cae9-41fd-9c42-320da5571768" />
-<img width="985" height="547" alt="image" src="https://github.com/user-attachments/assets/4716235c-87d3-4338-8174-9e18294570ef" />
+<img width="1106" height="883" alt="image" src="https://github.com/user-attachments/assets/42f5c664-2a4a-4898-997f-f0236bf4a0ef" />
+<img width="1106" height="883" alt="image" src="https://github.com/user-attachments/assets/c802997b-6d85-46c1-bbc7-82b6ceed967a" />
+
 
 
 
