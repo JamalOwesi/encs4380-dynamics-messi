@@ -11,10 +11,10 @@ A static site (GitHub Pages) where all maths and graphs are computed in Python r
 
 | Member | Student ID | Module | GitHub Issue |
 |---|---|---|---|
-| _name_ | _id_ | 1 · First-order time response | #1 |
-| _name_ | _id_ | 2 · First-order frequency response | #2 |
-| _name_ | _id_ | 3 · Second-order response | #3 |
-| _name_ | _id_ | 4 · Guess the sensor | #4 |
+| Abdalfatah Dawoud | 1231540| 1 · First-order time response | #1 |
+| Jamal Owesi | 1230773 | 2 · First-order frequency response | #2 |
+| Ahmad Abuayyash | 1230582 | 3 · Second-order response | #3 |
+| Hakam Snoubar | 1230152 | 4 · Guess the sensor | #4 |
 
 ## Files
 
