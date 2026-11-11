@@ -79,7 +79,8 @@ Open `http://localhost:8000`. Opening the HTML by double-click will not work, be
 
 ## Screenshots
 Module 1 · First-order time response
-![Project Screenshot](module1.png)
+<img width="919" height="893" alt="image" src="https://github.com/user-attachments/assets/006a46f3-6ef2-4d0a-8cd6-9c8c6b244d31" />
+<img width="922" height="443" alt="image" src="https://github.com/user-attachments/assets/978457d7-2ef1-4033-834a-5e088468a978" />
 
 Module 2 · First-order frequency response
 <img width="941" height="888" alt="image" src="https://github.com/user-attachments/assets/59f4deee-894f-4803-b925-14d68f8dd834" />
