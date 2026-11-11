@@ -91,7 +91,17 @@ Open `http://localhost:8000`. Opening the HTML by double-click will not work, be
 
 **Module 3 · Second-order response** 
 
-![Project Screenshot](module3.png)
+<img width="823" height="914" alt="image" src="https://github.com/user-attachments/assets/b9fdb05f-5b56-45ae-9aec-99996eaec32d" />
+<img width="921" height="816" alt="image" src="https://github.com/user-attachments/assets/a017118a-6734-4578-ab43-b922632aa106" />
+
+**Module 4 · Guess the sensor** 
+
+<img width="983" height="772" alt="image" src="https://github.com/user-attachments/assets/f2571f11-cae9-41fd-9c42-320da5571768" />
+<img width="985" height="547" alt="image" src="https://github.com/user-attachments/assets/4716235c-87d3-4338-8174-9e18294570ef" />
+
+
+
+
 
 
 ## Use of AI tools
