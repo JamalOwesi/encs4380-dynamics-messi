@@ -82,7 +82,8 @@ Module 1 · First-order time response
 ![Project Screenshot](module1.png)
 
 Module 2 · First-order frequency response
-<img width="1895" height="895" alt="image" src="https://github.com/user-attachments/assets/85609abb-3f9b-478a-a179-f265e372696c" />
+<img width="941" height="888" alt="image" src="https://github.com/user-attachments/assets/59f4deee-894f-4803-b925-14d68f8dd834" />
+
 
 Module 3 · Second-order response Screenshot
 
