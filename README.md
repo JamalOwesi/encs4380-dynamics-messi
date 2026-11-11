@@ -78,7 +78,11 @@ python -m http.server
 Open `http://localhost:8000`. Opening the HTML by double-click will not work, because the page fetches the `.py` files.
 
 ## Screenshots
+Module 1 · First-order time response
 ![Project Screenshot](module1.png)
+
+Module 2 · First-order frequency response
+<img width="1895" height="895" alt="image" src="https://github.com/user-attachments/assets/85609abb-3f9b-478a-a179-f265e372696c" />
 
 Module 3 · Second-order response Screenshot
 
