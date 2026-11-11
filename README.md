@@ -78,7 +78,7 @@ python -m http.server
 Open `http://localhost:8000`. Opening the HTML by double-click will not work, because the page fetches the `.py` files.
 
 ## Screenshots
-
+![Project Screenshot](module1.png)
 
 ## Use of AI tools
 
