@@ -44,7 +44,6 @@ Instructor: Dr. Wasel Ghanem
 A static site on GitHub Pages where every equation and every graph is computed in **Python running in the browser** through Pyodide.
 No server, Binder or login. It works on a phone.
 
-<img src="docs/screenshots/p1.png" alt="Homework 2 · P1 PID playground" width="820">
 
 </div>
 
