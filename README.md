@@ -9,7 +9,9 @@ Instructor: Dr. Wasel Ghanem
 
 <br>
 
-<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/"><img src="https://img.shields.io/badge/HOMEWORK_1-DYNAMIC_CHARACTERISTICS-19c6ff?style=for-the-badge&labelColor=0b0d12&logo=python&logoColor=white" alt="Open Homework 1"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/"><img src="https://img.shields.io/badge/MAIN_PAGE-BOTH_HOMEWORKS-d9a22c?style=for-the-badge&labelColor=0b0d12&logo=githubpages&logoColor=white" alt="Open the main page"></a>
+&nbsp;
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html"><img src="https://img.shields.io/badge/HOMEWORK_1-DYNAMIC_CHARACTERISTICS-19c6ff?style=for-the-badge&labelColor=0b0d12&logo=python&logoColor=white" alt="Open Homework 1"></a>
 &nbsp;
 <a href="https://jamalowesi.github.io/encs4380-dynamics-messi/control/"><img src="https://img.shields.io/badge/HOMEWORK_2-PID_CONTROL-e0132f?style=for-the-badge&labelColor=0b0d12&logo=arduino&logoColor=white" alt="Open Homework 2"></a>
 
@@ -18,10 +20,10 @@ Instructor: Dr. Wasel Ghanem
 <br>
 
 **Homework 1**<br>
-<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/#m1"><img src="https://img.shields.io/badge/1-TIME_RESPONSE-19c6ff?style=flat-square&labelColor=0b0d12" alt="1 TIME RESPONSE"></a>
-<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/#m2"><img src="https://img.shields.io/badge/2-FREQUENCY_RESPONSE-19c6ff?style=flat-square&labelColor=0b0d12" alt="2 FREQUENCY RESPONSE"></a>
-<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/#m3"><img src="https://img.shields.io/badge/3-SECOND_ORDER-19c6ff?style=flat-square&labelColor=0b0d12" alt="3 SECOND ORDER"></a>
-<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/#m4"><img src="https://img.shields.io/badge/4-GUESS_THE_SENSOR-19c6ff?style=flat-square&labelColor=0b0d12" alt="4 GUESS THE SENSOR"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html#m1"><img src="https://img.shields.io/badge/1-TIME_RESPONSE-19c6ff?style=flat-square&labelColor=0b0d12" alt="1 TIME RESPONSE"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html#m2"><img src="https://img.shields.io/badge/2-FREQUENCY_RESPONSE-19c6ff?style=flat-square&labelColor=0b0d12" alt="2 FREQUENCY RESPONSE"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html#m3"><img src="https://img.shields.io/badge/3-SECOND_ORDER-19c6ff?style=flat-square&labelColor=0b0d12" alt="3 SECOND ORDER"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html#m4"><img src="https://img.shields.io/badge/4-GUESS_THE_SENSOR-19c6ff?style=flat-square&labelColor=0b0d12" alt="4 GUESS THE SENSOR"></a>
 
 **Homework 2**<br>
 <a href="https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p1"><img src="https://img.shields.io/badge/P1-PID_PLAYGROUND-e0132f?style=flat-square&labelColor=0b0d12" alt="P1 PID PLAYGROUND"></a>
@@ -44,6 +46,7 @@ Instructor: Dr. Wasel Ghanem
 A static site on GitHub Pages where every equation and every graph is computed in **Python running in the browser** through Pyodide.
 No server, Binder or login. It works on a phone.
 
+<img src="docs/screenshots/home.png" alt="Main page" width="820">
 
 </div>
 
@@ -88,10 +91,10 @@ Every module has its own link.
 
 | Homework 1 | | Homework 2 | |
 |---|---|---|---|
-| 一 First-order time | [`index.html#m1`](https://jamalowesi.github.io/encs4380-dynamics-messi/#m1) | 五 P1 PID playground | [`control/#p1`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p1) |
-| 二 Frequency response | [`index.html#m2`](https://jamalowesi.github.io/encs4380-dynamics-messi/#m2) | 六 P2 Slow sensor | [`control/#p2`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p2) |
-| 三 Second order | [`index.html#m3`](https://jamalowesi.github.io/encs4380-dynamics-messi/#m3) | 七 P3 Digital PID | [`control/#p3`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p3) |
-| 四 Guess the sensor | [`index.html#m4`](https://jamalowesi.github.io/encs4380-dynamics-messi/#m4) | 八 P4 Tuning challenge | [`control/#p4`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p4) |
+| 一 First-order time | [`dynamics.html#m1`](https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html#m1) | 五 P1 PID playground | [`control/#p1`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p1) |
+| 二 Frequency response | [`dynamics.html#m2`](https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html#m2) | 六 P2 Slow sensor | [`control/#p2`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p2) |
+| 三 Second order | [`dynamics.html#m3`](https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html#m3) | 七 P3 Digital PID | [`control/#p3`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p3) |
+| 四 Guess the sensor | [`dynamics.html#m4`](https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html#m4) | 八 P4 Tuning challenge | [`control/#p4`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p4) |
 | | | 我 My system | [`control/#my`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#my) |
 | | | 証 Validation | [`control/#val`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#val) |
 
@@ -105,7 +108,7 @@ $$u(t) = K_p\,e(t) + K_i\!\int e\,dt + K_d\,\frac{de}{dt}, \qquad e = r - y_m$$
 
 ### What's new in v2.0
 
-- **Linked homeworks:** the Homework 1 page (`index.html`) has a new `制 Control` nav link and a "Next: Homework 2" card; the Control section links back to Homework 1. Homework 1's maths and styling are unchanged.
+- **Main page** (`index.html`) linking every module of both homeworks. The Homework 1 page moved to `dynamics.html`; its maths and styling are unchanged, and it gained `家 Home` and `制 Control` links.
 - **Control section** (`control/`) with four PID modules, a "My system" design page and a validation page.
 - **Our own solver** (`control/py/pid_core.py`): the closed loop is stepped in time with **RK4** (or **Euler**, selectable in P1). We use no closed-form answers, because none exist for every gain setting, saturation or sensor.
 - **Arduino code generation:** the digital PID that is simulated is exported as a ready-to-upload sketch.
@@ -229,7 +232,7 @@ Example: second-order plant (ωn = 2, ζ = 0.5) with τs = 0.2 s gives **Ku ≈ 
 
 ## Homework 1 · Dynamic Characteristics (v1.0)
 
-> A sensor never reports the present: it reports the past, smoothed. Four modules on one page, [`index.html`](https://jamalowesi.github.io/encs4380-dynamics-messi/).
+> A sensor never reports the present: it reports the past, smoothed. Four modules on one page, [`dynamics.html`](https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html).
 
 ### 一 · First-order time response
 - ✅ Sliders for K and τ, and a step / ramp input switch
@@ -355,7 +358,8 @@ The maths runs in plain Python too, because each module imports `js` only inside
 ## Files
 
 ```
-index.html               Landing page = Homework 1 (all four modules), links to the Control section
+index.html               Main page: links every module of both homeworks
+dynamics.html            Homework 1: all four modules on one page
 style.css                Shared theme (robotics + samurai), used by every page
 module1.py               一 First-order time response
 module2.py               二 First-order frequency response
@@ -385,12 +389,14 @@ TESTING.md               How to run and test each module by hand
 
 | From | Link | Goes to |
 |---|---|---|
-| Homework 1 page (`index.html`) | nav `制 Control` and the "Next: Homework 2" card | `control/` |
+| Main page (`index.html`) | module cards | `dynamics.html#m1`–`#m4` and `control/#p1`–`#val` |
+| Homework 1 (`dynamics.html`) | nav `家 Home`, "← Toolkit home" | `index.html` |
+| Homework 1 (`dynamics.html`) | nav `制 Control` and the "Next: Homework 2" card | `control/` |
 | Control section (`control/index.html`) | nav `家 Home` | `../index.html` |
-| Control section (`control/index.html`) | nav `侍 HW1` | `../index.html#m1` |
+| Control section (`control/index.html`) | nav `侍 HW1` | `../dynamics.html` |
 | P4 (`control/py/p4_challenge.py`) | loads `../module4.py` | Module 4's `generate_sensor()` |
 
-**How the pages work.** `index.html` loads Pyodide, fetches the four `.py` files and starts each module; each module's HTML section holds the element IDs its Python file looks for. `control/index.html` does the same with `control/py/*.py` and `../module4.py`. The tab is in the address (`control/#p3`), so every module has its own link.
+**How the pages work.** `dynamics.html` loads Pyodide, fetches the four `.py` files and starts each module; each module's HTML section holds the element IDs its Python file looks for. `control/index.html` does the same with `control/py/*.py` and `../module4.py`. The tab is in the address (`control/#p3`), so every module has its own link.
 
 **Tech.** HTML and CSS · Python 3 in the browser via [Pyodide](https://pyodide.org) · Homework 1 draws its charts as SVG generated in Python · Homework 2 plots with [Plotly.js](https://plotly.com/javascript/) · GitHub Pages.
 
@@ -402,9 +408,10 @@ TESTING.md               How to run and test each module by hand
 
 - **Added** the Control section `control/`: P1 PID playground, P2 slow sensor, P3 digital PID, P4 tuning challenge, My system, Validation.
 - **Added** our own closed-loop solver `control/py/pid_core.py` (RK4/Euler), the Arduino code generator, and the tests in `tests/`.
-- **Linked** the two homeworks:
-  - `index.html` (Homework 1): added the `制 Control` nav link and a "Next: Homework 2 · Control" card above the footer.
-  - `control/index.html`: the `侍 HW1` nav link points to `../index.html#m1`. It used to point to `dynamics.html`, which doesn't exist, and gave a **404**.
+- **Linked** the two homeworks through a main page:
+  - `index.html` is now the **main page**, with a card for every module of both homeworks.
+  - Homework 1 moved from `index.html` to `dynamics.html`, with `家 Home` and `制 Control` nav links and a "Next: Homework 2" card.
+  - `control/index.html`: `家 Home` goes to the main page and `侍 HW1` to `../dynamics.html`, so every page reaches every other page.
 - **Reused** Module 4: P4's hidden plants come from `module4.generate_sensor()`.
 - **Updated** this README: Homework 2 section, team table with both homeworks, validation results, screenshots, run/test instructions, AI use for both homeworks. Fixed the live-site link (it pointed to `localhost`).
 - **Added** `TESTING.md` (how to run and test each module) and `docs/screenshots/`.
