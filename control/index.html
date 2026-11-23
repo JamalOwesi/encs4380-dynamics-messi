@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>制 Control · Group Messi Toolkit (ENCS4380 HW2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@500;600;700&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="control.css">
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+</head>
+<body>
+<svg style="position:absolute;width:0;height:0;border:0;overflow:hidden" aria-hidden="true"><defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8693a8"/></marker></defs></svg>
+
+<nav id="tabs">
+  <a href="../index.html"><b>家</b>Home</a>
+  <a href="../dynamics.html"><b>侍</b>HW1</a>
+  <a href="#overview" data-tab="overview"><b>制</b>Overview</a>
+  <a href="#p1" data-tab="p1"><b>五</b>PID</a>
+  <a href="#p2" data-tab="p2"><b>六</b>Sensor</a>
+  <a href="#p3" data-tab="p3"><b>七</b>Digital</a>
+  <a href="#p4" data-tab="p4"><b>八</b>Challenge</a>
+  <a href="#my" data-tab="my"><b>我</b>My system</a>
+  <a href="#val" data-tab="val"><b>証</b>Checks</a>
+</nav>
+
+<main id="top" class="wide">
+
+  <header class="hero compact">
+    <div class="seal">制</div>
+    <small>ENCS4380 · HOMEWORK 2 · GROUP MESSI</small>
+    <h1>Close the loop.</h1>
+    <div class="jp">フィードバック · PID · 制御</div>
+    <p>Homework 1 measured how slow a system is. Here the controller compares what we want with what the sensor
+       says, and drives the actuator: <span class="formula">u = Kp·e + Ki·∫e dt + Kd·de/dt</span></p>
+    <div id="status">Booting control loops…</div>
+  </header>
+
+<!-- ============================================================ OVERVIEW -->
+<section class="panel" id="tab-overview">
+  <div class="katana"></div>
+  <h2><span class="num">制</span>Overview <span class="jp">概要</span></h2>
+  <p class="sub">Pick a module. Every response is stepped in time by our own solver (<code>py/pid_core.py</code>, RK4 by default), not a closed-form curve.</p>
+  <div class="grid2">
+    <a class="card module-card" href="#p1"><div class="kanji">五</div><h4>P1 · PID playground</h4><p>Turn each gain and watch the four step-response numbers change.</p><span class="go">OPEN →</span></a>
+    <a class="card module-card" href="#p2"><div class="kanji">六</div><h4>P2 · A slow sensor in the loop</h4><p>Slow sensor, more overshoot, then oscillation. Bonus: Ziegler–Nichols.</p><span class="go">OPEN →</span></a>
+    <a class="card module-card" href="#p3"><div class="kanji">七</div><h4>P3 · Digital PID</h4><p>Sampling time, stair-step output, windup, and Arduino code you can copy.</p><span class="go">OPEN →</span></a>
+    <a class="card module-card" href="#p4"><div class="kanji">八</div><h4>P4 · Tuning challenge</h4><p>A hidden plant from Module 4's generator and a spec. Tune it and get scored.</p><span class="go">OPEN →</span></a>
+    <a class="card module-card" href="#my"><div class="kanji">我</div><h4>My system</h4><p>Messi's drive-motor speed loop: measured model, spec, gains and sketch.</p><span class="go">OPEN →</span></a>
+    <a class="card module-card" href="#val"><div class="kanji">証</div><h4>Validation checks</h4><p>The three checks from the sheet, computed by our solver.</p><span class="go">OPEN →</span></a>
+  </div>
+  <section class="card">
+    <h3>Who built what</h3>
+    <div class="test"><span>P1 PID playground</span><span>Abdalfatah Dawoud · issue #5</span></div>
+    <div class="test"><span>P2 Slow sensor</span><span>Jamal Owesi · issue #6</span></div>
+    <div class="test"><span>P3 Digital PID</span><span>Ahmad Abuayyash · issue #7</span></div>
+    <div class="test"><span>P4 Tuning challenge</span><span>Hakam · issue #8</span></div>
+    <div class="test"><span>My system + validation</span><span>Everyone · issue #9</span></div>
+  </section>
+</section>
+
+<!-- ============================================================ P1 -->
+<section class="panel" id="tab-p1" hidden>
+  <div class="katana"></div>
+  <h2><span class="num">五</span>P1 · PID playground <span class="jp">PID 調整</span></h2>
+  <p class="sub">Start with P only, then add I, then D. Check each against the validation numbers.</p>
+  <div class="module">
+    <aside class="card controls" id="p1-controls"></aside>
+    <div class="main">
+      <section class="card">
+        <h3>Block diagram</h3>
+        <svg class="diagram" viewBox="0 0 660 150" role="img" aria-label="PID loop block diagram">
+          <text x="8" y="56" class="lbl">r</text>
+          <line x1="20" y1="60" x2="78" y2="60" class="wire" marker-end="url(#arr)"/>
+          <circle cx="90" cy="60" r="12" class="sum"/><text x="84" y="65" class="lbl">&#931;</text>
+          <text x="96" y="88" class="lbl small">&minus;</text><text x="64" y="52" class="lbl small">+</text>
+          <line x1="102" y1="60" x2="138" y2="60" class="wire" marker-end="url(#arr)"/><text x="112" y="52" class="lbl small">e</text>
+          <rect x="140" y="35" width="170" height="50" class="blk ctrl"/>
+          <text x="225" y="55" class="lbl c">PID</text>
+          <text x="225" y="73" class="lbl c small" id="p1-bd-c">Kp Ki Kd</text>
+          <line x1="310" y1="60" x2="338" y2="60" class="wire" marker-end="url(#arr)"/><text x="318" y="52" class="lbl small">u</text>
+          <rect x="340" y="35" width="70" height="50" class="blk"/>
+          <polyline points="352,72 364,72 386,48 398,48" class="wire"/>
+          <text x="375" y="100" class="lbl c small" id="p1-bd-lim">limit</text>
+          <line x1="410" y1="60" x2="438" y2="60" class="wire" marker-end="url(#arr)"/>
+          <rect x="440" y="35" width="150" height="50" class="blk plant"/>
+          <text x="515" y="55" class="lbl c">Plant</text>
+          <text x="515" y="73" class="lbl c small" id="p1-bd-g">G(s)</text>
+          <line x1="590" y1="60" x2="650" y2="60" class="wire" marker-end="url(#arr)"/><text x="636" y="52" class="lbl">y</text>
+          <polyline points="620,60 620,128 90,128 90,74" class="wire" fill="none" marker-end="url(#arr)"/>
+          <text x="330" y="122" class="lbl c small">sensor H(s) = 1 (perfect; P2 makes it slow)</text>
+        </svg>
+      </section>
+      <section class="card">
+        <h3>Response</h3>
+        <div id="p1-plot-y" class="plot"></div>
+        <div id="p1-plot-u" class="plot"></div>
+        <div id="p1-metrics"></div>
+      </section>
+      <details class="card"><summary>What each gain does (the lecture table)</summary>
+        <table class="ctable">
+          <tr><th>Increase</th><th>Rise time</th><th>Overshoot</th><th>Settling time</th><th>Steady-state error</th></tr>
+          <tr><th>Kp</th><td>shorter</td><td>larger</td><td>small change</td><td>smaller (not zero)</td></tr>
+          <tr><th>Ki</th><td>shorter</td><td>larger</td><td>longer</td><td>removed</td></tr>
+          <tr><th>Kd</th><td>small change</td><td>smaller</td><td>shorter</td><td>no effect</td></tr>
+        </table>
+        <p class="caption">These are tendencies. Saturation, a slow sensor or a second-order plant can change them, which is why you check with the simulator.</p>
+      </details>
+      <div id="p1-predict"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ P2 -->
+<section class="panel" id="tab-p2" hidden>
+  <div class="katana"></div>
+  <h2><span class="num">六</span>P2 · A slow sensor in the loop <span class="jp">遅いセンサー</span></h2>
+  <p class="sub">The controller only controls what the sensor says. If the loop oscillates, look at τs before blaming the gains.</p>
+  <div class="module">
+    <aside class="card controls" id="p2-controls"></aside>
+    <div class="main">
+      <section class="card">
+        <h3>Loop with a sensor</h3>
+        <svg class="diagram" viewBox="0 0 660 150" role="img" aria-label="Loop with a sensor in the feedback path">
+          <text x="8" y="56" class="lbl">r</text>
+          <line x1="20" y1="60" x2="78" y2="60" class="wire" marker-end="url(#arr)"/>
+          <circle cx="90" cy="60" r="12" class="sum"/><text x="84" y="65" class="lbl">&#931;</text>
+          <line x1="102" y1="60" x2="198" y2="60" class="wire" marker-end="url(#arr)"/>
+          <rect x="200" y="35" width="130" height="50" class="blk ctrl"/><text x="265" y="65" class="lbl c">PID</text>
+          <line x1="330" y1="60" x2="408" y2="60" class="wire" marker-end="url(#arr)"/>
+          <rect x="410" y="35" width="150" height="50" class="blk plant"/><text x="485" y="65" class="lbl c">Plant G(s)</text>
+          <line x1="560" y1="60" x2="650" y2="60" class="wire" marker-end="url(#arr)"/><text x="575" y="50" class="lbl">y (true)</text>
+          <polyline points="610,60 610,118 420,118" class="wire" fill="none" marker-end="url(#arr)"/>
+          <rect x="260" y="100" width="160" height="38" class="blk sensor"/><text x="340" y="124" class="lbl c">Sensor 1/(&#964;s s+1)</text>
+          <polyline points="260,118 90,118 90,74" class="wire" fill="none" marker-end="url(#arr)"/>
+          <text x="108" y="111" class="lbl small">y<tspan baseline-shift="sub" font-size="9">m</tspan> = what the PID sees</text>
+        </svg>
+      </section>
+      <section class="card">
+        <h3>True output vs sensor</h3>
+        <div id="p2-plot-y" class="plot"></div>
+        <div id="p2-metrics"></div>
+      </section>
+      <section class="card">
+        <h3>Overshoot as the sensor gets slower</h3>
+        <div id="p2-plot-sweep" class="plot"></div>
+      </section>
+      <details class="card bonus"><summary>Bonus · Ziegler–Nichols tuning</summary>
+        <p>Find the P-only gain Ku where the loop (plant + this sensor) starts to oscillate, and its period Tu, then apply the rules.
+           Ku comes from the frequency where the loop phase reaches −180°; you can confirm it in the plot above.</p>
+        <div class="row"><button id="p2-zn-btn">Find Ku and Tu</button></div>
+        <div id="p2-zn-out"></div>
+      </details>
+      <div id="p2-predict"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ P3 -->
+<section class="panel" id="tab-p3" hidden>
+  <div class="katana"></div>
+  <h2><span class="num">七</span>P3 · Digital PID <span class="jp">デジタル制御</span></h2>
+  <p class="sub"><span class="formula">u[k] = Kp·e[k] + Ki·Ts·Σe[j] + Kd·(e[k] − e[k−1])/Ts</span> Start with a small Ts and make it larger until the response breaks.</p>
+  <div class="module">
+    <aside class="card controls" id="p3-controls"></aside>
+    <div class="main">
+      <section class="card">
+        <h3>Sampled response</h3>
+        <div id="p3-plot-y" class="plot"></div>
+        <div id="p3-plot-u" class="plot"></div>
+        <div id="p3-metrics"></div>
+      </section>
+      <section class="card">
+        <h3>Performance as Ts grows</h3>
+        <div id="p3-plot-sweep" class="plot"></div>
+      </section>
+      <section class="card code">
+        <h3>Arduino loop for these gains <button id="p3-copy" class="ghost small">Copy</button> <span id="p3-copy-msg" class="caption"></span></h3>
+        <pre id="p3-code"></pre>
+      </section>
+      <div id="p3-predict"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ P4 -->
+<section class="panel" id="tab-p4" hidden>
+  <div class="katana"></div>
+  <h2><span class="num">八</span>P4 · Tuning challenge <span class="jp">調整試練</span></h2>
+  <p class="sub">A hidden plant from the same random generator as Homework 1 Module 4. Meet every part of the spec.</p>
+  <div class="module">
+    <aside class="card controls" id="p4-controls"></aside>
+    <div class="main">
+      <section class="card">
+        <h3>Hidden plant</h3>
+        <p id="p4-plant-info" class="caption" style="margin:0 0 10px"></p>
+        <div id="p4-plot-y" class="plot"></div>
+        <div id="p4-plot-u" class="plot"></div>
+      </section>
+      <section class="card"><h3>Score</h3><div id="p4-result"></div></section>
+      <div id="p4-predict"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ MY SYSTEM -->
+<section class="panel" id="tab-my" hidden>
+  <div class="katana"></div>
+  <h2><span class="num">我</span>My system · Messi's drive motor <span class="jp">速度制御</span></h2>
+  <p class="sub">Plant: PWM duty cycle [%] in, wheel speed [rpm] out, measured with the encoder. <span class="formula">G(s) = K/(τs + 1)</span></p>
+  <div class="module">
+    <aside class="card controls" id="ms-controls"></aside>
+    <div class="main">
+      <section class="card">
+        <h3>Why this spec</h3>
+        <p>The speed loop runs under the micromouse's straight-line and turn profiles. If one wheel overshoots its speed
+           and the other does not, the mouse yaws a little at every speed change and drifts towards a wall, so we keep
+           the damping in the practical 0.6–0.8 range from the lecture. The settling time sets how closely the wheels follow
+           a speed profile: it must be well below the time of one cell-to-cell move. The PWM command must stay inside
+           0–100 %: once it saturates the loop is open, the two wheels stop matching, and the integrator winds up.
+           Zero steady-state error keeps both wheels at the same speed on long straights.</p>
+        <p class="caption">Edit this paragraph with your own numbers (cell length, top speed) before submitting.</p>
+      </section>
+      <section class="card">
+        <h3>Simulated speed step</h3>
+        <div id="ms-plot-y" class="plot"></div>
+        <div id="ms-plot-u" class="plot"></div>
+        <div id="ms-checks"></div>
+      </section>
+      <details class="card" open><summary>Step test: get K and τ from the encoder log</summary>
+        <ol class="steps">
+          <li>Upload the sketch below with <code>STEP_TEST = true</code> and the wheel off the ground.</li>
+          <li>Open the Serial Monitor (115200), copy the lines <code>t,setpoint,speed,u</code> and paste them here.</li>
+          <li>Press <b>Fit</b>, check the plot, then <b>Use these values</b> and write the source in the left panel.</li>
+        </ol>
+        <textarea id="ms-log" rows="6" placeholder="t,setpoint,speed,u&#10;0.000,0,0.0,0.0&#10;..."></textarea>
+        <label>PWM step [%] (if the log has no u column) <input type="number" id="ms-step" value="50"></label>
+        <label>Step time [s] (same case) <input type="number" id="ms-steptime" value="0.5"></label>
+        <div class="row"><button id="ms-fit">Fit</button><button id="ms-example" class="ghost">Load a synthetic example (not real data)</button></div>
+        <div id="ms-fit-out"></div>
+        <div id="ms-plot-fit" class="plot"></div>
+      </details>
+      <section class="card code">
+        <h3>Arduino sketch for Messi (encoder + PWM) <button id="ms-copy" class="ghost small">Copy</button> <span id="ms-copy-msg" class="caption"></span></h3>
+        <pre id="ms-code"></pre>
+      </section>
+      <div id="ms-predict"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ VALIDATION -->
+<section class="panel" id="tab-val" hidden>
+  <div class="katana"></div>
+  <h2><span class="num">証</span>Validation checks <span class="jp">検証</span></h2>
+  <p class="sub">Plant K/(τs + 1) with K = 1, τ = 1 s. Each number is measured from our own time-stepped simulation and compared with the formula.</p>
+  <section class="card"><h3>Expected vs our solver</h3><div id="val-table"></div></section>
+  <div class="grid2">
+    <section class="card"><h3>Check 1</h3><div id="val-plot1" class="plot"></div></section>
+    <section class="card"><h3>Check 2</h3><div id="val-plot2" class="plot"></div></section>
+  </div>
+  <div class="row"><button id="val-run" class="ghost">Run the checks again</button></div>
+</section>
+
+  <footer><b>武士道</b> × ROBOTICS<br>ENCS4380 · Birzeit University · Homework 2 · All maths and graphs are computed in Python (Pyodide).</footer>
+</main>
+
+<script>
+// ------------------------------------------------------------------ helpers used by Python
+window.syncOutputs = function () {
+  document.querySelectorAll('input[type=range]').forEach(function (s) {
+    var o = document.getElementById(s.id + '-out');
+    if (o) o.textContent = s.value;
+  });
+};
+document.addEventListener('input', function (e) {
+  if (e.target.type === 'range') {
+    var o = document.getElementById(e.target.id + '-out');
+    if (o) o.textContent = e.target.value;
+  }
+});
+window.copyToClipboard = function (text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text);
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    document.execCommand('copy'); ta.remove();
+  }
+};
+
+// ------------------------------------------------------------------ tabs (driven by the #hash)
+function showTab(name, scroll) {
+  if (!document.getElementById('tab-' + name)) name = 'overview';
+  document.querySelectorAll('.panel').forEach(function (p) { p.hidden = (p.id !== 'tab-' + name); });
+  document.querySelectorAll('#tabs a[data-tab]').forEach(function (a) {
+    a.classList.toggle('active', a.dataset.tab === name);
+  });
+  if (window.renderTab) window.renderTab(name);
+  document.querySelectorAll('#tab-' + name + ' .js-plotly-plot').forEach(function (p) { Plotly.Plots.resize(p); });
+  if (scroll) document.getElementById('tab-' + name).scrollIntoView();
+}
+window.addEventListener('hashchange', function () { showTab(location.hash.slice(1), true); });
+showTab(location.hash.slice(1) || 'overview', false);
+
+// ------------------------------------------------------------------ boot Python
+var PY_FILES = [['../module4.py', 'module4.py'],   // Homework 1 Module 4: random sensor generator (used by P4)
+                ['py/pid_core.py'], ['py/ui.py'], ['py/arduino_code.py'], ['py/p1_playground.py'],
+                ['py/p2_sensor.py'], ['py/p3_digital.py'], ['py/p4_challenge.py'], ['py/my_system.py'],
+                ['py/validation.py'], ['py/main.py']];
+window.pyReady = function () {
+  var st = document.getElementById('status');
+  if (st) st.remove();
+  showTab(location.hash.slice(1) || 'overview', false);
+};
+(async function boot() {
+  var status = document.getElementById('status');
+  try {
+    var py = await loadPyodide();
+    for (var i = 0; i < PY_FILES.length; i++) {
+      var url = PY_FILES[i][0];
+      var name = PY_FILES[i][1] || url.split('/').pop();
+      var res = await fetch(url);
+      if (!res.ok) throw new Error('Could not load ' + url + ' (' + res.status + ')');
+      py.FS.writeFile(name, await res.text());
+    }
+    py.runPython('import main; main.start()');
+  } catch (err) {
+    status.className = 'err';
+    status.textContent = 'Failed to start: ' + err;
+    console.error(err);
+  }
+})();
+</script>
+</body>
+</html>

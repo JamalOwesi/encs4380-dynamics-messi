@@ -1,0 +1,94 @@
+/* Control section (Homework 2). Loads AFTER ../style.css (Homework 1's theme) and only
+   adds what the PID pages need: the controls column, tables, code, diagrams and Plotly. */
+
+main.wide{max-width:1240px}
+.hero.compact{padding:22px 0 0}
+.hero.compact h1{font-size:clamp(1.5rem,4.6vw,2.4rem)}
+.hero.compact::before{width:200px;height:200px;margin-left:-100px}
+code{font-family:ui-monospace,Consolas,monospace;color:#ffd0d7;background:rgba(224,19,47,.1);padding:1px 6px;font-size:.92em}
+
+/* two columns: controls on the left, plots on the right */
+.module{display:grid;grid-template-columns:330px minmax(0,1fr);gap:18px;align-items:start;margin-top:14px}
+.main{display:grid;gap:18px;min-width:0}
+.controls{position:sticky;top:64px;max-height:calc(100vh - 80px);overflow:auto;padding:16px 18px}
+.controls .group+.group{margin-top:16px;padding-top:14px;border-top:1px dashed var(--steel-hi)}
+.controls label{margin:7px 0}
+.controls label .val{min-width:70px}
+.controls input[type=range]{min-width:100px}
+.controls input[type=text]{width:100%;margin-top:4px}
+.radios{display:flex;flex-direction:column}
+.radios label{margin:4px 0}
+select,input[type=text],textarea{background:rgba(0,0,0,.45);border:1px solid var(--steel-hi);color:var(--text);
+  padding:8px 10px;font:inherit;font-weight:600}
+select:focus,input[type=text]:focus,textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 2px rgba(25,198,255,.25)}
+select{width:100%}
+textarea{width:100%;font:13px/1.4 ui-monospace,Consolas,monospace}
+button.small{padding:6px 12px;font-size:.62rem}
+h3 button{margin-left:auto}
+
+/* plots (Plotly draws its own SVGs: undo Homework 1's global svg rule for them) */
+.plot{min-height:200px}
+.plot + .plot{margin-top:12px}
+.js-plotly-plot svg.main-svg{background:transparent!important;border:0!important;width:100%!important;height:100%!important}
+
+/* tables */
+.ctable{width:100%;border-collapse:collapse;font-size:.98rem;margin-top:6px}
+.ctable th,.ctable td{padding:8px 10px;border-bottom:1px dashed var(--steel-hi);text-align:left;vertical-align:top}
+.ctable tr:last-child th,.ctable tr:last-child td{border-bottom:0}
+.ctable th{font-family:var(--display);font-size:.66rem;letter-spacing:.12em;color:var(--muted);font-weight:600;text-transform:uppercase}
+.metrics .big b.test-pass,.metrics .big b.test-fail{font-size:1rem}
+.metric .big{font-size:1.25rem;word-break:break-word}
+
+/* pass / fail / so-so tags */
+.tag.mid{color:var(--gold);font-family:var(--display);font-size:.78rem;letter-spacing:.1em}
+.bad{color:var(--red);font-weight:700}
+
+/* hand formulas, warnings, specs, scores */
+.theory{background:rgba(25,198,255,.07);border:1px solid rgba(25,198,255,.35);border-left:3px solid var(--cyan);
+        padding:10px 12px;margin:14px 0 0;color:#cfe9ff}
+.warn{background:rgba(217,162,44,.1);border:1px solid rgba(217,162,44,.45);border-left:3px solid var(--gold);
+      padding:10px 12px;color:#f3d28a;margin:10px 0}
+ul.spec{margin:6px 0 0;padding-left:20px;color:var(--text)}
+.score{font-family:var(--display);font-size:1rem;letter-spacing:.06em;color:var(--gold);margin-top:12px}
+.score b{font-size:1.6rem}
+ol.steps{color:var(--muted);padding-left:20px}
+
+/* predict box (same look as Homework 1's) */
+.predict .prediction-feedback p{margin:6px 0}
+.predict .prediction-feedback .explain{color:var(--muted)}
+
+/* details cards */
+details.card summary{cursor:pointer;font-family:var(--display);font-size:.74rem;letter-spacing:.18em;color:var(--cyan);text-transform:uppercase}
+details.card[open] summary{margin-bottom:12px}
+details.bonus{border-left-color:var(--gold)}
+
+/* generated code */
+.card.code pre{margin:0;max-height:380px;overflow:auto;background:rgba(0,0,0,.6);border:1px solid var(--steel);
+               color:#cfe9ff;padding:14px;font:12.5px/1.5 ui-monospace,Consolas,monospace}
+
+/* block diagrams */
+.diagram .wire{stroke:#8693a8;stroke-width:1.6;fill:none}
+.diagram .sum{fill:rgba(0,0,0,.4);stroke:#c7d0dd;stroke-width:1.6}
+.diagram .blk{fill:rgba(255,255,255,.04);stroke:#8693a8;stroke-width:1.4}
+.diagram .blk.ctrl{fill:rgba(224,19,47,.14);stroke:var(--crimson-hi)}
+.diagram .blk.plant{fill:rgba(25,198,255,.10);stroke:var(--cyan)}
+.diagram .blk.sensor{fill:rgba(217,162,44,.12);stroke:var(--gold)}
+.diagram .lbl{font:600 15px Rajdhani,system-ui,sans-serif;fill:#e6ebf2}
+.diagram .lbl.small{font-size:12px;fill:#aab6c8}
+.diagram .lbl.c{text-anchor:middle}
+
+/* phones */
+@media (max-width:860px){
+  .module{grid-template-columns:1fr}
+  .controls{position:static;max-height:none}
+}
+.metric b{text-transform:uppercase}
+label .lab{flex:1 1 auto}
+.controls label:has(input[type=range]) .lab{flex:0 0 auto;min-width:64px}
+.controls label:has(input[type=checkbox]) .lab,.controls label:has(input[type=radio]) .lab{flex:1}
+.controls label:has(input[type=checkbox]),.controls label:has(input[type=radio]){flex-wrap:nowrap;align-items:flex-start}
+.controls label:has(input[type=number]) input{width:110px;margin-left:auto}
+@media (max-width:860px){
+  nav{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}
+  nav a{white-space:nowrap;flex:0 0 auto}
+}
