@@ -7,16 +7,6 @@
 **ENCS4380 Interfacing Techniques · Birzeit University · Group Messi**<br>
 Instructor: Dr. Wasel Ghanem
 
-![Release](https://img.shields.io/badge/release-v2.0-e0132f?style=flat-square)
-![Homework 1](https://img.shields.io/badge/HW1-dynamic%20characteristics-19c6ff?style=flat-square)
-![Homework 2](https://img.shields.io/badge/HW2-PID%20control-d9a22c?style=flat-square)
-![Python in the browser](https://img.shields.io/badge/Python-Pyodide-3776ab?style=flat-square&logo=python&logoColor=white)
-![No server](https://img.shields.io/badge/server-none-2fe39a?style=flat-square)
-
-**[▶ Open the live site](https://jamalowesi.github.io/encs4380-dynamics-messi/)** ·
-[Homework 1](https://jamalowesi.github.io/encs4380-dynamics-messi/) ·
-[Homework 2 · Control](https://jamalowesi.github.io/encs4380-dynamics-messi/control/)
-
 A static site on GitHub Pages where every equation and every graph is computed in **Python running in the browser** through Pyodide.
 No server, Binder or login. It works on a phone.
 
