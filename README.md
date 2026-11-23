@@ -7,8 +7,44 @@
 **ENCS4380 Interfacing Techniques · Birzeit University · Group Messi**<br>
 Instructor: Dr. Wasel Ghanem
 
+<br>
+
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/"><img src="https://img.shields.io/badge/HOMEWORK_1-DYNAMIC_CHARACTERISTICS-19c6ff?style=for-the-badge&labelColor=0b0d12&logo=python&logoColor=white" alt="Open Homework 1"></a>
+&nbsp;
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/control/"><img src="https://img.shields.io/badge/HOMEWORK_2-PID_CONTROL-e0132f?style=for-the-badge&labelColor=0b0d12&logo=arduino&logoColor=white" alt="Open Homework 2"></a>
+
+<sub>▲ click to open the live site (runs in your browser, works on a phone)</sub>
+
+<br>
+
+**Homework 1**<br>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/#m1"><img src="https://img.shields.io/badge/1-TIME_RESPONSE-19c6ff?style=flat-square&labelColor=0b0d12" alt="1 TIME RESPONSE"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/#m2"><img src="https://img.shields.io/badge/2-FREQUENCY_RESPONSE-19c6ff?style=flat-square&labelColor=0b0d12" alt="2 FREQUENCY RESPONSE"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/#m3"><img src="https://img.shields.io/badge/3-SECOND_ORDER-19c6ff?style=flat-square&labelColor=0b0d12" alt="3 SECOND ORDER"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/#m4"><img src="https://img.shields.io/badge/4-GUESS_THE_SENSOR-19c6ff?style=flat-square&labelColor=0b0d12" alt="4 GUESS THE SENSOR"></a>
+
+**Homework 2**<br>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p1"><img src="https://img.shields.io/badge/P1-PID_PLAYGROUND-e0132f?style=flat-square&labelColor=0b0d12" alt="P1 PID PLAYGROUND"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p2"><img src="https://img.shields.io/badge/P2-SLOW_SENSOR-e0132f?style=flat-square&labelColor=0b0d12" alt="P2 SLOW SENSOR"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p3"><img src="https://img.shields.io/badge/P3-DIGITAL_PID-e0132f?style=flat-square&labelColor=0b0d12" alt="P3 DIGITAL PID"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p4"><img src="https://img.shields.io/badge/P4-TUNING_CHALLENGE-e0132f?style=flat-square&labelColor=0b0d12" alt="P4 TUNING CHALLENGE"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/control/#my"><img src="https://img.shields.io/badge/MY_SYSTEM-MESSI_MOTOR-d9a22c?style=flat-square&labelColor=0b0d12" alt="MY SYSTEM MESSI MOTOR"></a>
+<a href="https://jamalowesi.github.io/encs4380-dynamics-messi/control/#val"><img src="https://img.shields.io/badge/VALIDATION-3%2F3_PASS-2fe39a?style=flat-square&labelColor=0b0d12" alt="VALIDATION 3/3 PASS"></a>
+
+<br>
+
+<a href="https://github.com/JamalOwesi/encs4380-dynamics-messi/releases"><img src="https://img.shields.io/badge/release-v2.0-e0132f?style=flat-square&labelColor=0b0d12" alt="release v2.0"></a>
+<a href="https://github.com/JamalOwesi/encs4380-dynamics-messi/tree/main/tests"><img src="https://img.shields.io/badge/tests-PASSING-2fe39a?style=flat-square&labelColor=0b0d12" alt="tests PASSING"></a>
+<a href="TESTING.md"><img src="https://img.shields.io/badge/guide-HOW_TO_TEST-8693a8?style=flat-square&labelColor=0b0d12" alt="guide HOW TO TEST"></a>
+<a href="https://pyodide.org"><img src="https://img.shields.io/badge/Python-PYODIDE-3776ab?style=flat-square&labelColor=0b0d12&logo=python&logoColor=white" alt="Python PYODIDE"></a>
+<a href="https://github.com/JamalOwesi/encs4380-dynamics-messi"><img src="https://img.shields.io/badge/server-NONE-2fe39a?style=flat-square&labelColor=0b0d12&logo=githubpages&logoColor=white" alt="server NONE"></a>
+
+<br>
+
 A static site on GitHub Pages where every equation and every graph is computed in **Python running in the browser** through Pyodide.
 No server, Binder or login. It works on a phone.
+
+<img src="docs/screenshots/p1.png" alt="Homework 2 · P1 PID playground" width="820">
 
 </div>
 
