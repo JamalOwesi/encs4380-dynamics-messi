@@ -14,13 +14,13 @@ Instructor: Dr. Wasel Ghanem
 ![No server](https://img.shields.io/badge/server-none-2fe39a?style=flat-square)
 
 **[▶ Open the live site](https://jamalowesi.github.io/encs4380-dynamics-messi/)** ·
-[Homework 1](https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html) ·
+[Homework 1](https://jamalowesi.github.io/encs4380-dynamics-messi/) ·
 [Homework 2 · Control](https://jamalowesi.github.io/encs4380-dynamics-messi/control/)
 
 A static site on GitHub Pages where every equation and every graph is computed in **Python running in the browser** through Pyodide.
 No server, Binder or login. It works on a phone.
 
-<img src="docs/screenshots/home.png" alt="Home page" width="820">
+<img src="docs/screenshots/p1.png" alt="Homework 2 · P1 PID playground" width="820">
 
 </div>
 
@@ -42,6 +42,7 @@ No server, Binder or login. It works on a phone.
 - [Run it locally](#run-it-locally)
 - [Tests](#tests)
 - [Files](#files)
+- [Changelog](#changelog)
 - [Use of AI tools](#use-of-ai-tools)
 
 ---
@@ -64,10 +65,10 @@ Every module has its own link.
 
 | Homework 1 | | Homework 2 | |
 |---|---|---|---|
-| 一 First-order time | [`dynamics.html#m1`](https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html#m1) | 五 P1 PID playground | [`control/#p1`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p1) |
-| 二 Frequency response | [`dynamics.html#m2`](https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html#m2) | 六 P2 Slow sensor | [`control/#p2`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p2) |
-| 三 Second order | [`dynamics.html#m3`](https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html#m3) | 七 P3 Digital PID | [`control/#p3`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p3) |
-| 四 Guess the sensor | [`dynamics.html#m4`](https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html#m4) | 八 P4 Tuning challenge | [`control/#p4`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p4) |
+| 一 First-order time | [`index.html#m1`](https://jamalowesi.github.io/encs4380-dynamics-messi/#m1) | 五 P1 PID playground | [`control/#p1`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p1) |
+| 二 Frequency response | [`index.html#m2`](https://jamalowesi.github.io/encs4380-dynamics-messi/#m2) | 六 P2 Slow sensor | [`control/#p2`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p2) |
+| 三 Second order | [`index.html#m3`](https://jamalowesi.github.io/encs4380-dynamics-messi/#m3) | 七 P3 Digital PID | [`control/#p3`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p3) |
+| 四 Guess the sensor | [`index.html#m4`](https://jamalowesi.github.io/encs4380-dynamics-messi/#m4) | 八 P4 Tuning challenge | [`control/#p4`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#p4) |
 | | | 我 My system | [`control/#my`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#my) |
 | | | 証 Validation | [`control/#val`](https://jamalowesi.github.io/encs4380-dynamics-messi/control/#val) |
 
@@ -81,7 +82,7 @@ $$u(t) = K_p\,e(t) + K_i\!\int e\,dt + K_d\,\frac{de}{dt}, \qquad e = r - y_m$$
 
 ### What's new in v2.0
 
-- **Home page** (`index.html`) linking every module of both homeworks. The Homework 1 page moved to `dynamics.html`; its maths and styling are unchanged.
+- **Linked homeworks:** the Homework 1 page (`index.html`) has a new `制 Control` nav link and a "Next: Homework 2" card; the Control section links back to Homework 1. Homework 1's maths and styling are unchanged.
 - **Control section** (`control/`) with four PID modules, a "My system" design page and a validation page.
 - **Our own solver** (`control/py/pid_core.py`): the closed loop is stepped in time with **RK4** (or **Euler**, selectable in P1). We use no closed-form answers, because none exist for every gain setting, saturation or sensor.
 - **Arduino code generation:** the digital PID that is simulated is exported as a ready-to-upload sketch.
@@ -205,7 +206,7 @@ Example: second-order plant (ωn = 2, ζ = 0.5) with τs = 0.2 s gives **Ku ≈ 
 
 ## Homework 1 · Dynamic Characteristics (v1.0)
 
-> A sensor never reports the present: it reports the past, smoothed. Four modules on one page, [`dynamics.html`](https://jamalowesi.github.io/encs4380-dynamics-messi/dynamics.html).
+> A sensor never reports the present: it reports the past, smoothed. Four modules on one page, [`index.html`](https://jamalowesi.github.io/encs4380-dynamics-messi/).
 
 ### 一 · First-order time response
 - ✅ Sliders for K and τ, and a step / ramp input switch
@@ -331,8 +332,7 @@ The maths runs in plain Python too, because each module imports `js` only inside
 ## Files
 
 ```
-index.html               Home page: links every module of both homeworks
-dynamics.html            Homework 1: all four modules on one page
+index.html               Landing page = Homework 1 (all four modules), links to the Control section
 style.css                Shared theme (robotics + samurai), used by every page
 module1.py               一 First-order time response
 module2.py               二 First-order frequency response
@@ -358,9 +358,38 @@ docs/screenshots/        Images used in this README
 TESTING.md               How to run and test each module by hand
 ```
 
-**How the pages work.** `dynamics.html` loads Pyodide, fetches the four `.py` files and starts each module; each module's HTML section holds the element IDs its Python file looks for. `control/index.html` does the same with `control/py/*.py` and `../module4.py`. The tab is in the address (`control/#p3`), so every module has its own link.
+**How the two homeworks are linked.**
+
+| From | Link | Goes to |
+|---|---|---|
+| Homework 1 page (`index.html`) | nav `制 Control` and the "Next: Homework 2" card | `control/` |
+| Control section (`control/index.html`) | nav `家 Home` | `../index.html` |
+| Control section (`control/index.html`) | nav `侍 HW1` | `../index.html#m1` |
+| P4 (`control/py/p4_challenge.py`) | loads `../module4.py` | Module 4's `generate_sensor()` |
+
+**How the pages work.** `index.html` loads Pyodide, fetches the four `.py` files and starts each module; each module's HTML section holds the element IDs its Python file looks for. `control/index.html` does the same with `control/py/*.py` and `../module4.py`. The tab is in the address (`control/#p3`), so every module has its own link.
 
 **Tech.** HTML and CSS · Python 3 in the browser via [Pyodide](https://pyodide.org) · Homework 1 draws its charts as SVG generated in Python · Homework 2 plots with [Plotly.js](https://plotly.com/javascript/) · GitHub Pages.
+
+---
+
+## Changelog
+
+### v2.0 · Homework 2 (23 Nov 2026)
+
+- **Added** the Control section `control/`: P1 PID playground, P2 slow sensor, P3 digital PID, P4 tuning challenge, My system, Validation.
+- **Added** our own closed-loop solver `control/py/pid_core.py` (RK4/Euler), the Arduino code generator, and the tests in `tests/`.
+- **Linked** the two homeworks:
+  - `index.html` (Homework 1): added the `制 Control` nav link and a "Next: Homework 2 · Control" card above the footer.
+  - `control/index.html`: the `侍 HW1` nav link points to `../index.html#m1`. It used to point to `dynamics.html`, which doesn't exist, and gave a **404**.
+- **Reused** Module 4: P4's hidden plants come from `module4.generate_sensor()`.
+- **Updated** this README: Homework 2 section, team table with both homeworks, validation results, screenshots, run/test instructions, AI use for both homeworks. Fixed the live-site link (it pointed to `localhost`).
+- **Added** `TESTING.md` (how to run and test each module) and `docs/screenshots/`.
+- **Unchanged:** `module1.py` … `module4.py` and `style.css`.
+
+### v1.0 · Homework 1 (12 Nov 2026)
+
+- Four modules on one page: first-order time response, frequency response, second-order response, guess the sensor. Validation checks 1–6 pass.
 
 ---
 
@@ -387,7 +416,7 @@ AI coding assistants were used in both homeworks, as the assignments allow. In t
 
 - **The closed-loop solver.** We used Claude (Anthropic) to help write `pid_core.py`: the state-vector loop stepped with RK4/Euler, the digital PID with anti-windup, the step-response metrics and the Routh test. We checked it against the three validation numbers and the tests in `tests/`.
 - **Understanding PID behaviour.** AI helped us understand questions that came up while testing, for example why adding Kd *raises* the overshoot on a first-order plant with PI (Kd adds to the time constant, τ + K·Kd, which lowers ζ), while it damps a second-order plant.
-- **Arduino code and the frontend.** AI helped write the Arduino code generator and restyle the Control section to match Homework 1's theme, and link both homeworks from one home page.
+- **Arduino code and the frontend.** AI helped write the Arduino code generator and restyle the Control section to match Homework 1's theme, and link the two homeworks together.
 
 | Member | Module | How AI was used |
 |---|---|---|
